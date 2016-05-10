@@ -1,18 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xmlns="http://java.sun.com/xml/ns/javaee"
-xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<!-- Client -->
 	<servlet>
-		<servlet-name>Blogger_katy</servlet-name>
-		<servlet-class>katy.bordercollie.controller.Blogger_katyServlet</servlet-class>
+		<servlet-name>Admin Home</servlet-name>
+		<jsp-file>/admin/index.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Blogger_katy</servlet-name>
-		<url-pattern>/blogger_katy</url-pattern>
+		<servlet-name>Admin Home</servlet-name>
+		<url-pattern>/admin</url-pattern>
+		<url-pattern>/admin/</url-pattern>
 	</servlet-mapping>
+
+	<security-constraint>
+		<web-resource-collection>
+			<url-pattern>/_oh/admin</url-pattern>
+			<url-pattern>/_oh/admin/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<filter>
+		<filter-name>ObjectifyFilter</filter-name>
+		<filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ObjectifyFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>
+			Admin Home
+		</welcome-file>
 	</welcome-file-list>
 </web-app>

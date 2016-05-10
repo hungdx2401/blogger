@@ -1,6 +1,6 @@
 materialAdmin
 		.config(function($stateProvider, $urlRouterProvider) {
-			$urlRouterProvider.otherwise("category/list");
+			$urlRouterProvider.otherwise("product/list");
 
 			$stateProvider
 					.state('product', {
@@ -12,7 +12,7 @@ materialAdmin
 							{
 								url : '/list',
 								templateUrl : 'admin/views/list-article.jsp',
-								controller : 'listArticleCtrl.js',
+								controller : 'listArticleCtrl',
 								resolve : {
 									loadPlugin : function($ocLazyLoad) {
 										return $ocLazyLoad

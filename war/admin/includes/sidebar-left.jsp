@@ -10,7 +10,7 @@
     <div class="profile-menu">
         <a href="" toggle-submenu>
             <div class="profile-pic">
-                <img src="/admin/img/profile-pics/4.jpg" alt="">
+                <img src="/admin/img/profile-pics/border-1.jpg" alt="">
             </div>
 
             <div class="profile-info">

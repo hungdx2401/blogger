@@ -31,13 +31,13 @@
         <li data-ui-sref-active="active">
             <a data-ui-sref="home" data-ng-click="mactrl.sidebarStat($event)"><i class="md md-home"></i> Trang chủ</a>
         </li>        
-        <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('product') }">
-            <a href="" toggle-submenu><i class="md md-redeem"></i> Sản phẩm</a>
+        <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('article') }">
+            <a href="" toggle-submenu><i class="md md-redeem"></i> Bài viết</a>
 
             <ul>                
-                <li><a data-ui-sref-active="active" data-ui-sref="product.list" data-ng-click="mactrl.sidebarStat($event)">Danh sách sản phẩm</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="product.create" data-ng-click="mactrl.sidebarStat($event)">Thêm sản phẩm mới</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="product.edit" data-ng-click="mactrl.sidebarStat($event)">Sửa sản phẩm</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="article.list" data-ng-click="mactrl.sidebarStat($event)">Danh sách bài viết</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="article.create" data-ng-click="mactrl.sidebarStat($event)">Thêm bài viết mới</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="product.edit" data-ng-click="mactrl.sidebarStat($event)">Sửa bài viết</a></li>
             </ul>
         </li>    
         <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('category') }">

@@ -41,4 +41,11 @@
 		<nature>com.google.appengine.eclipse.core.gaeNature</nature>
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>appengine-rest-java</name>
+			<type>2</type>
+			<location>/home/xuanhung/workspace/appengine-rest-java/src</location>
+		</link>
+	</linkedResources>
 </projectDescription>

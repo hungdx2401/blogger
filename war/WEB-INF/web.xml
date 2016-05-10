@@ -6,19 +6,29 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 	<!-- Client -->
 	<servlet>
+		<servlet-name>ArticleEndpoint</servlet-name>
+		<servlet-class>katy.bordercollie.admin.ArticleEndpoint</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ArticleEndpoint</servlet-name>
+		<url-pattern>/_admin/articles</url-pattern>
+		<url-pattern>/_admin/articles/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>Admin Home</servlet-name>
 		<jsp-file>/admin/index.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Admin Home</servlet-name>
-		<url-pattern>/admin</url-pattern>
-		<url-pattern>/admin/</url-pattern>
+		<url-pattern>/_admin</url-pattern>
+		<url-pattern>/_admin/</url-pattern>
 	</servlet-mapping>
 
 	<security-constraint>
 		<web-resource-collection>
-			<url-pattern>/admin</url-pattern>
-			<url-pattern>/admin/*</url-pattern>
+			<url-pattern>/_admin</url-pattern>
+			<url-pattern>/_admin/*</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>admin</role-name>

@@ -133,7 +133,7 @@
 	<script src="/admin/js/modules/calendar.js"></script>
 
 	<!-- Controllers -->
-	<script src="/admin/js/controllers/listArticleCtrl.js"></script>
+	<script src="/admin/js/controllers/list-article-controller.js"></script>
 
 </body>
 </html>

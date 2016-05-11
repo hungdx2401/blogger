@@ -4,6 +4,24 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
+	<servlet>
+		<servlet-name>GetUploadUrlServlet</servlet-name>
+		<servlet-class>katy.bordercollie.blobstore.GetUploadUrlServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetUploadUrlServlet</servlet-name>
+		<url-pattern>/_blobstore/get-upload-url</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UploadServlet</servlet-name>
+		<servlet-class>katy.bordercollie.blobstore.UploadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UploadServlet</servlet-name>
+		<url-pattern>/_blobstore/upload</url-pattern>
+	</servlet-mapping>
+
+
 	<!-- Client -->
 	<servlet>
 		<servlet-name>ArticleEndpoint</servlet-name>
@@ -41,6 +59,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	</filter>
 	<filter-mapping>
 		<filter-name>ObjectifyFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>GeneralFilter</filter-name>
+		<filter-class>katy.bordercollie.filter.GeneralFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>GeneralFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 

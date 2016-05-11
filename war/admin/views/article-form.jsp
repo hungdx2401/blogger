@@ -39,6 +39,17 @@
                 </div>
             </div>
             <p class="f-500 c-black m-b-20">Ảnh sản phẩm</p>
+            <div class="row">
+            
+            	<div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <img ng-src="{{photo}}" alt="">
+                        <button class="btn btn-default btn-icon-2 waves-effect">
+                        	<i class="md md-close"></i>
+                       	</button>
+                    </div>
+                </div>                                         
+            </div>
             <div class="row" ng-show="product.listPhoto.length>0">
             
             	<div class="col-sm-6 col-md-3" ng-repeat="photo in product.listPhoto">
@@ -130,10 +141,10 @@
             <br>
             
             <p class="f-500 c-black m-b-20">Chi tiết sản phẩm.</p>
-            <div data-html-editor id="htmlEditor"></div>            
+            <div data-html-editor id="htmlEditor"></div>                  
             
             <br>
-            <button type="button" class="btn btn-primary btn-sm m-t-10" ng-click="saveProduct()" >Submit</button>
+            <button type="button" class="btn btn-primary btn-sm m-t-10" ng-click="saveArticle()" >Submit</button>
             <button type="reset" class="btn btn-default btn-sm m-t-10">Reset</button>                      
         </div>
     </div>       

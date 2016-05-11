@@ -10,6 +10,10 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import com.googlecode.objectify.ObjectifyService;
+
+import katy.bordercollie.entity.Article;
+
 /**
  * Filter này đảm bảo rằng tất cả các class cần thiết đều được đăng
  * ký objectify.
@@ -33,6 +37,7 @@ public class GeneralFilter implements Filter {
 		/**
 		 * Đăng ký objectify class.
 		 */
+		ObjectifyService.register(Article.class);
 		LOGGER.info("Gọi general filter.");
 		chain.doFilter(req, resp);
 	}

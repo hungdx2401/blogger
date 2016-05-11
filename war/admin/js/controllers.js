@@ -5,7 +5,7 @@ materialAdmin
 
     .controller('materialadminCtrl', function($timeout, $state, growlService){
         //Welcome Message
-        growlService.growl('Welcome back Mallinda!', 'inverse')
+        growlService.growl('Bạn đang truy cập trang quản trị Border Collie Việt Nam.', 'success')
         
         
         // Detact Mobile Browser

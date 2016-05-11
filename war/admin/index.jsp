@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Petshop Admin</title>
+<title>Border Collie Việt Nam | Trang quản trị</title>
 
 <!-- Vendor CSS -->
 <link href="/admin/vendors/socicon/socicon.min.css" rel="stylesheet">

@@ -9,7 +9,7 @@
     </li>
 
     <li class="logo hidden-xs">
-        <a href="index.html">Trang quản trị {{ layoutSS }}</a>
+        <a href="index.html">Border Collie Việt Nam Admin {{ layoutSS }}</a>
     </li>
 
     <li class="pull-right">

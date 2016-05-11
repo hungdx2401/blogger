@@ -13,15 +13,10 @@ import javax.servlet.ServletResponse;
 import com.googlecode.objectify.ObjectifyService;
 
 import katy.bordercollie.entity.Article;
+import katy.bordercollie.entity.Category;
+import katy.bordercollie.entity.Event;
+import katy.bordercollie.entity.Page;
 
-/**
- * Filter này đảm bảo rằng tất cả các class cần thiết đều được đăng
- * ký objectify.
- * 
- * @author xuanhung2401@gmail.com
- * 
- * @doc Apr 16, 2016 1:42:02 AM
- */
 public class GeneralFilter implements Filter {
 
 	private static final Logger LOGGER = Logger.getLogger(GeneralFilter.class.getName());
@@ -38,6 +33,9 @@ public class GeneralFilter implements Filter {
 		 * Đăng ký objectify class.
 		 */
 		ObjectifyService.register(Article.class);
+		ObjectifyService.register(Category.class);
+		ObjectifyService.register(Event.class);
+		ObjectifyService.register(Page.class);
 		LOGGER.info("Gọi general filter.");
 		chain.doFilter(req, resp);
 	}

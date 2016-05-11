@@ -47,15 +47,15 @@
 		</li>
 
 		<li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('collection') }">
-			<a href="" toggle-submenu> <i class="socicon socicon-yelp"></i> Quản lý event
+			<a href="" toggle-submenu> <i class="socicon socicon-yelp"></i> Quản lý sự kiện
 			</a>
 
 			<ul>
 				<li>
-					<a data-ui-sref-active="active" data-ui-sref="collection.list" data-ng-click="mactrl.sidebarStat($event)">Danh sách event</a>
+					<a data-ui-sref-active="active" data-ui-sref="collection.list" data-ng-click="mactrl.sidebarStat($event)">Danh sách sự kiện</a>
 				</li>
 				<li>
-					<a data-ui-sref-active="active" data-ui-sref="article.create" data-ng-click="mactrl.sidebarStat($event)">Thêm mới event</a>
+					<a data-ui-sref-active="active" data-ui-sref="article.create" data-ng-click="mactrl.sidebarStat($event)">Thêm mới sự kiện</a>
 				</li>
 			</ul>
 		</li>

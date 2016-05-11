@@ -1,32 +1,20 @@
 package katy.bordercollie.entity;
 
-import java.util.ArrayList;
-
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Unindex;
 
 @Entity
-public class Article {
+public class Event {
 	@Id
 	private String id;
 	@Unindex
-	private String alias;
-	@Unindex
 	private String title;
-	@Index
-	private String categoryId;
-	@Index
-	private String eventId;
 	@Unindex
 	private String description;
 	@Unindex
-	private ArrayList<String> photos;
-	@Unindex
-	private String content;
-	@Unindex
-	private ArrayList<String> tags;
+	private String thumbnail;
 	@Index
 	private long doc;
 	@Unindex
@@ -50,12 +38,36 @@ public class Article {
 		this.title = title;
 	}
 
-	public String getContent() {
-		return content;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public long getDoc() {
+		return doc;
+	}
+
+	public void setDoc(long doc) {
+		this.doc = doc;
+	}
+
+	public long getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(long updated) {
+		this.updated = updated;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 }

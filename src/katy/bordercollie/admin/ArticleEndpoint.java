@@ -1,8 +1,10 @@
 package katy.bordercollie.admin;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
+
 import java.io.IOException;
-import java.math.BigInteger;
+import java.util.Calendar;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
@@ -11,14 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.api.users.UserServiceFactory;
-import com.google.appengine.labs.repackaged.org.json.JSONException;
+import com.googlecode.objectify.cmd.Query;
 
 import design.java.rest.RESTFactory;
 import design.java.rest.RESTGeneralError;
 import design.java.rest.RESTGeneralSuccess;
 import design.java.rest.entity.RESTDocumentSingle;
 import katy.bordercollie.entity.Article;
-import katy.bordercollie.helper.BaseX;
+import katy.bordercollie.helper.IdGenerator;
 
 @SuppressWarnings("serial")
 public class ArticleEndpoint extends HttpServlet {
@@ -26,22 +28,65 @@ public class ArticleEndpoint extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		LOGGER.info(
-				"Gọi article endpoint, method get." + UserServiceFactory.getUserService().getCurrentUser().getEmail());
-		Article art = new Article();
-		art.setId(new BaseX(BaseX.DICTIONARY_MINE).encode(new BigInteger(String.valueOf(System.nanoTime()))));
-		art.setTitle("Test Article.");
-		RESTFactory.make(RESTGeneralSuccess.OK).putData(art).doResponse(resp);
+		LOGGER.info("Gọi article endpoint, method GET.");
+
+		int action = 1;
+		String[] arrayURI = req.getRequestURI().split("/");
+		String id = "";
+		if (arrayURI.length == 4) {
+			id = arrayURI[arrayURI.length - 1];
+			action = 2;
+		}
+		switch (action) {
+		case 1:
+			int page = 1;
+			int limit = 10;
+			int totalPage = 1;
+			int totalItem = 1;
+			try {
+				page = Integer.parseInt(req.getParameter("page"));
+				limit = Integer.parseInt(req.getParameter("limit"));
+			} catch (Exception e) {
+				page = 1;
+				limit = 10;
+			}
+			Query<Article> query = ofy().load().type(Article.class).filter("status >", 0);
+			totalItem = query.count();
+			totalPage = totalItem / limit;
+			/*
+			 * Thêm một vào tổng số trang nếu chia dư.
+			 */
+			if (totalItem % limit > 0) {
+				totalPage++;
+			}
+			List<Article> list = query.limit(limit).offset((page - 1) * limit).list();
+			RESTFactory.make(RESTGeneralSuccess.OK).putData(list).putMeta("totalPage", totalPage)
+					.putMeta("totalItem", totalItem).putMeta("limit", limit).putMeta("page", page).doResponse(resp);
+			break;
+		case 2:
+			Article obj = ofy().load().type(Article.class).id(id).now();
+			RESTFactory.make(RESTGeneralSuccess.OK).putData(obj).doResponse(resp);
+			break;
+		default:
+			break;
+		}
+
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		LOGGER.info("Gọi article endpoint, method POST.");
 		try {
 			RESTDocumentSingle document = RESTDocumentSingle.getInstanceFromRequest(req);
 			Article article = document.getData().getInstance(Article.class);
+			article.setId(IdGenerator.generateId());
+			article.setDoc(Calendar.getInstance().getTimeInMillis());
+			article.setUpdated(Calendar.getInstance().getTimeInMillis());
+			article.setStatus(3);
+			article.setCreatedBy(UserServiceFactory.getUserService().getCurrentUser().getEmail());
 			ofy().save().entity(article).now();
 			RESTFactory.make(RESTGeneralSuccess.CREATED).putData(article).doResponse(resp);
-		} catch (JSONException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace(System.err);
 			RESTFactory.make(RESTGeneralError.BAD_REQUEST).doResponse(resp);

@@ -8,7 +8,7 @@
 	text-align: center;
 	position: absolute;
 	top: -5px;
-	left: 185px;
+	left: 262px;
 }
 </style>
 <div class="container">
@@ -33,7 +33,7 @@
 			<div class="row" ng-show="obj.photos.length>0">
 				<div class="col-sm-6 col-md-3" ng-repeat="photo in obj.photos">
 					<div class="thumbnail">
-						<img ng-src="{{photo}}" alt="">
+						<img ng-src="{{photo}}=s260-c" alt="">
 						<button class="btn btn-default btn-icon-2 waves-effect" ng-show="{{photo.length>0}}" ng-click="obj.photos.splice($index, 1)">
 							<i class="md md-close"></i>
 						</button>
@@ -49,8 +49,8 @@
 						<div class="fg-line">
 							<div class="select">
 								<select class="form-control" ng-model="obj.categoryId">
-									<option value="0">Vui lòng chọn</option>
-									<option ng-repeat="category in listCategories" value="{{category.id}}">{{category.name}}</option>
+									<option value="">Chọn danh mục cho bài viết</option>
+									<option ng-repeat="category in categories" value="{{category.id}}">{{category.title}}</option>
 								</select>
 							</div>
 						</div>
@@ -62,8 +62,8 @@
 						<div class="fg-line">
 							<div class="select">
 								<select class="form-control" ng-model="obj.eventId">
-									<option value="0">Vui lòng chọn</option>
-									<option ng-repeat="collection in listCollections" value="{{collection.id}}">{{collection.name}}</option>
+									<option value="">Gắn bài viết với một sự kiện</option>
+									<option ng-repeat="event in events" value="{{event.id}}">{{event.title}}</option>
 								</select>
 							</div>
 						</div>
@@ -78,10 +78,9 @@
 			</div>
 			<p class="f-500 c-black m-b-20">Nội dung</p>
 			<div data-html-editor id="htmlEditor"></div>
-
 			<br>
-			<button type="button" class="btn btn-primary btn-sm m-t-10" ng-click="saveArticle()">Submit</button>
-			<button type="reset" class="btn btn-default btn-sm m-t-10">Reset</button>
+			<button type="button" class="btn btn-primary btn-sm m-t-10" ng-click="clickSaveArticle()">Lưu bài viết</button>
+			<button type="reset" class="btn btn-default btn-sm m-t-10">Làm lại</button>
 		</div>
 	</div>
 </div>

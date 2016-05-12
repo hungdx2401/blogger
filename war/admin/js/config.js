@@ -35,7 +35,35 @@ materialAdmin
 							{
 								url : '/create',
 								templateUrl : 'admin/views/article-form.jsp',
-								controller : 'createArticleCtrl',
+								controller : 'articleCtrl',
+								resolve : {
+									loadPlugin : function($ocLazyLoad) {
+										return $ocLazyLoad
+												.load([
+														{
+															name : 'css',
+															insertBefore : '#app-level',
+															files : [
+																	'admin/vendors/bower_components/bootstrap-select/dist/css/bootstrap-select.css',
+																	'admin/css/uploadfile.min.css',
+																	'admin/vendors/bower_components/summernote/dist/summernote.css' ]
+														},
+														{
+															name : 'vendors',
+															files : [
+																	'admin/vendors/bower_components/bootstrap-select/dist/js/bootstrap-select.js',
+																	'admin/vendors/bower_components/summernote/dist/summernote.min.js',
+																	'admin/vendors/other/jquery.uploadfile.min.js' ]
+														} ])
+									}
+								}
+							})
+					.state(
+							'article.edit',
+							{
+								url : '/edit',
+								templateUrl : 'admin/views/article-form.jsp',
+								controller : 'articleCtrl',
 								resolve : {
 									loadPlugin : function($ocLazyLoad) {
 										return $ocLazyLoad

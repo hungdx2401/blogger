@@ -29,8 +29,17 @@ public class Article {
 	private ArrayList<String> tags;
 	@Index
 	private long doc;
+	@Index
+	private String createdBy;
 	@Unindex
 	private long updated;
+
+	/**
+	 * 3. Mới tạo. <br>
+	 * 2. Đã index. <br>
+	 * 1. Đã xử lý tag. <br>
+	 * 0. Đã xóa. <br>
+	 */
 	@Index
 	private int status;
 
@@ -42,6 +51,14 @@ public class Article {
 		this.id = id;
 	}
 
+	public String getAlias() {
+		return alias;
+	}
+
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -50,12 +67,84 @@ public class Article {
 		this.title = title;
 	}
 
+	public String getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(String eventId) {
+		this.eventId = eventId;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public ArrayList<String> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(ArrayList<String> photos) {
+		this.photos = photos;
+	}
+
 	public String getContent() {
 		return content;
 	}
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public ArrayList<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(ArrayList<String> tags) {
+		this.tags = tags;
+	}
+
+	public long getDoc() {
+		return doc;
+	}
+
+	public void setDoc(long doc) {
+		this.doc = doc;
+	}
+
+	public long getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(long updated) {
+		this.updated = updated;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
 
 }

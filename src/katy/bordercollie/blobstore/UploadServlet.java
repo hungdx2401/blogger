@@ -16,26 +16,17 @@ import com.google.appengine.api.images.ServingUrlOptions;
 @SuppressWarnings("serial")
 public class UploadServlet extends HttpServlet {
 
-	private static final Logger LOGGER = Logger.getLogger(UploadServlet.class
-			.getName());
-
-	public void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws IOException {
-
-	}
+	private static final Logger LOGGER = Logger.getLogger(UploadServlet.class.getName());
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			LOGGER.warning("Called here !");
 			String imgKey = BlobKeyProcess.getBlobKeyString(req, "logo");
-			ImagesService imagesService = ImagesServiceFactory
-					.getImagesService();
+			ImagesService imagesService = ImagesServiceFactory.getImagesService();
 			BlobKey blobKey = new BlobKey(imgKey);
 			LOGGER.warning("Key : " + imgKey);
-			ServingUrlOptions suo = ServingUrlOptions.Builder
-					.withBlobKey(blobKey);
+			ServingUrlOptions suo = ServingUrlOptions.Builder.withBlobKey(blobKey);
 			LOGGER.warning("Url : " + imagesService.getServingUrl(suo));
 			resp.getWriter().println(imagesService.getServingUrl(suo));
 		} catch (Exception e) {

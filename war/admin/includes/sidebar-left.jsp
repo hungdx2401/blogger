@@ -40,9 +40,9 @@
 				<li>
 					<a data-ui-sref-active="active" data-ui-sref="article.create" data-ng-click="mactrl.sidebarStat($event)">Thêm mới bài viết</a>
 				</li>
-				<!-- <li>
-					<a data-ui-sref-active="active" data-ui-sref="product.edit" data-ng-click="mactrl.sidebarStat($event)">Sửa bài viết</a>
-				</li> -->
+				<li ng-show="action==2">
+					<a data-ui-sref-active="active" data-ui-sref="article.edit" data-ng-click="mactrl.sidebarStat($event)">Sửa bài viết</a>
+				</li>
 			</ul>
 		</li>
 

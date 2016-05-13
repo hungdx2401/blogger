@@ -1,5 +1,10 @@
-materialAdmin.controller("listArticleCtrl", [ '$scope', '$http', '$state',
-		'growlService', function($scope, $http, $state, growlService) {
+materialAdmin.controller("listArticleCtrl", [
+		'$scope',
+		'$http',
+		'$state',
+		'growlService',
+		function($scope, $http, $state, growlService) {
+			$scope.$parent.action = 0;
 			$scope.listArticle = [];
 			$scope.limit = 10;
 			$scope.page = 1;
@@ -11,7 +16,44 @@ materialAdmin.controller("listArticleCtrl", [ '$scope', '$http', '$state',
 				$scope.page = page;
 				loadListArticle($scope, $http);
 			}
+			$scope.del = function(obj, index) {
+				swal({
+					title : "Có chắc không ?",
+					text : "Bài xóa rồi không lấy lại được đâu.",
+					type : "warning",
+					showCancelButton : true,
+					confirmButtonColor : "#F44336",
+					confirmButtonText : "Chuẩn, xóa đi",
+					cancelButtonText : "Ờ, click nhầm thôi",
+					closeOnConfirm : true
+				},
+						function() {
+							deleteArticleAtList($scope, $http, growlService,
+									obj, index);
+						});
+			}
 		} ]);
+
+function deleteArticleAtList($scope, $http, growlService, obj, index) {
+	var arequest = $http({
+		method : "DELETE",
+		url : "/_admin/articles?id=" + obj.id
+	});
+	arequest.success(function(response) {
+		growlService.growl('Xóa bài viết thành công !', 'success');
+		$scope.listArticle.splice(index, 1);
+		setTimeout(function() {
+			loadListArticle($scope, $http);
+		}, 1 * 1000);
+	});
+	arequest.error(function(data, status, headers, config) {
+		console.log(data);
+		growlService.growl('Không thể lấy thông tin bài viết.', 'danger');
+		setTimeout(function() {
+			loadListArticle($scope, $http);
+		}, 1 * 1000);
+	});
+}
 
 function loadListArticle($scope, $http) {
 	var arequest = $http({

@@ -29,7 +29,7 @@
 					<td>{{obj.attributes.updated | date:'dd/MM/yyyy HH:mm'}}</td>
 					<td><a href="#/article/edit?id={{obj.id}}"><button class="btn btn-icon command-edit" type="button">
 								<span class="md md-edit"></span>
-							</button></a> <a href=""><button class="btn btn-icon command-delete" type="button" ng-click="delete(article)">
+							</button></a> <a href=""><button class="btn btn-icon command-delete" type="button" ng-click="del(obj, $index)">
 								<span class="md md-delete"></span>
 							</button></a></td>
 				</tr>
@@ -41,7 +41,7 @@
 					<ul class="pagination" ng-show="listArticle.length>0">
 						<li class="prev {{page>1?'':'disabled'}}" ng-click="changePage(1)">
 							<a href="#prev" class="button"><i class="md md-chevron-left"></i></a>
-						</li>					
+						</li>
 						<li class="next" ng-show="page>1" ng-click="changePage(page-1)">
 							<a href="#next" class="button">{{page-1}}</a>
 						</li>

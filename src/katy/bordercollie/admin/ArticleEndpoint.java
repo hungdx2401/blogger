@@ -3,6 +3,7 @@ package katy.bordercollie.admin;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
@@ -29,7 +30,6 @@ public class ArticleEndpoint extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		LOGGER.info("Gọi article endpoint, method GET.");
-
 		int action = 1;
 		String[] arrayURI = req.getRequestURI().split("/");
 		String id = "";
@@ -50,7 +50,7 @@ public class ArticleEndpoint extends HttpServlet {
 				page = 1;
 				limit = 10;
 			}
-			Query<Article> query = ofy().load().type(Article.class).filter("status >", 0);
+			Query<Article> query = ofy().load().type(Article.class).filter("status in", Arrays.asList(1, 2, 3));
 			totalItem = query.count();
 			totalPage = totalItem / limit;
 			/*
@@ -59,7 +59,7 @@ public class ArticleEndpoint extends HttpServlet {
 			if (totalItem % limit > 0) {
 				totalPage++;
 			}
-			List<Article> list = query.limit(limit).offset((page - 1) * limit).list();
+			List<Article> list = query.limit(limit).offset((page - 1) * limit).order("-doc").list();
 			RESTFactory.make(RESTGeneralSuccess.OK).putData(list).putMeta("totalPage", totalPage)
 					.putMeta("totalItem", totalItem).putMeta("limit", limit).putMeta("page", page).doResponse(resp);
 			break;
@@ -70,7 +70,6 @@ public class ArticleEndpoint extends HttpServlet {
 		default:
 			break;
 		}
-
 	}
 
 	@Override
@@ -87,9 +86,8 @@ public class ArticleEndpoint extends HttpServlet {
 			ofy().save().entity(article).now();
 			RESTFactory.make(RESTGeneralSuccess.CREATED).putData(article).doResponse(resp);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace(System.err);
-			RESTFactory.make(RESTGeneralError.BAD_REQUEST).doResponse(resp);
+			RESTFactory.make(RESTGeneralError.SERVER_ERROR).doResponse(resp);
 		}
 	}
 
@@ -100,10 +98,10 @@ public class ArticleEndpoint extends HttpServlet {
 			RESTDocumentSingle document = RESTDocumentSingle.getInstanceFromRequest(req);
 			Article article = document.getData().getInstance(Article.class);
 			Article existArticle = ofy().load().type(Article.class).id(article.getId()).now();
-			if (existArticle == null) {
-
+			if (existArticle == null || existArticle.getStatus() == 0) {
+				RESTFactory.make(RESTGeneralError.NOT_FOUND).doResponse(resp);
+				return;
 			}
-
 			existArticle.setCategoryId(article.getCategoryId());
 			existArticle.setContent(article.getContent());
 			existArticle.setDescription(article.getDescription());
@@ -113,13 +111,37 @@ public class ArticleEndpoint extends HttpServlet {
 			existArticle.setTags(article.getTags());
 			existArticle.setAlias(article.getAlias());
 			existArticle.setUpdated(Calendar.getInstance().getTimeInMillis());
-
 			ofy().save().entity(existArticle).now();
 			RESTFactory.make(RESTGeneralSuccess.OK).putData(article).doResponse(resp);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace(System.err);
-			RESTFactory.make(RESTGeneralError.BAD_REQUEST).doResponse(resp);
+			RESTFactory.make(RESTGeneralError.SERVER_ERROR).doResponse(resp);
+		}
+	}
+
+	@Override
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		LOGGER.info("Gọi article endpoint, method DELETE.");
+		try {
+			String id = req.getParameter("id");
+			if (id == null || id.isEmpty()) {
+				RESTFactory.make(RESTGeneralError.BAD_REQUEST).doResponse(resp);
+				return;
+			}
+			Article article = ofy().load().type(Article.class).id(id).now();
+			if (article == null || article.getStatus() == 0) {
+				RESTFactory.make(RESTGeneralError.NOT_FOUND).doResponse(resp);
+				return;
+			}
+			article.setStatus(0);
+			if (ofy().save().entity(article).now() != null) {
+				RESTFactory.make(RESTGeneralSuccess.OK).doResponse(resp);
+			} else {
+				RESTFactory.make(RESTGeneralError.SERVER_ERROR).doResponse(resp);
+			}
+		} catch (Exception e) {
+			e.printStackTrace(System.err);
+			RESTFactory.make(RESTGeneralError.SERVER_ERROR).doResponse(resp);
 		}
 	}
 }

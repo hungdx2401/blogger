@@ -79,8 +79,9 @@
 			<p class="f-500 c-black m-b-20">Nội dung</p>
 			<div data-html-editor id="htmlEditor"></div>
 			<br>
-			<button type="button" class="btn btn-primary btn-sm m-t-10" ng-click="clickSaveArticle()">Lưu bài viết</button>
-			<button type="reset" class="btn btn-default btn-sm m-t-10">Làm lại</button>
+			<button type="button" class="btn btn-primary btn-sm m-t-10" ng-click="save()">Lưu bài viết</button>
+			<button type="reset" class="btn btn-default btn-sm m-t-10" style="margin-right: 30px">Làm lại</button>
+			<button type="button" class="btn bgm-red btn-sm m-t-10" ng-show="action==2" ng-click="del()">Xóa bài viết</button>
 		</div>
 	</div>
 </div>

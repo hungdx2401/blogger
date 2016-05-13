@@ -2,7 +2,7 @@ materialAdmin.controller("articleCtrl", [ '$scope', '$http', '$location',
 		'$state', 'growlService',
 		function($scope, $http, $location, $state, growlService) {
 			var idString = $location.search().id;
-			$scope.action = 1;
+			$scope.$parent.action = 1;
 			if (angular.isDefined(idString) && idString.length > 0) {
 				loadArticle($scope, $http, growlService, idString);
 			} else {
@@ -11,12 +11,26 @@ materialAdmin.controller("articleCtrl", [ '$scope', '$http', '$location',
 						photos : []
 					}
 				};
-				$scope.action = 1;
+				$scope.$parent.action = 1;
 			}
 			loadUploader($scope);
-			$scope.clickSaveArticle = function() {
+			$scope.save = function() {
 				$scope.obj.attributes.content = $("#htmlEditor").code();
 				saveArticle($scope, $http, growlService);
+			}
+			$scope.del = function() {
+				swal({
+					title : "Có chắc không ?",
+					text : "Bài xóa rồi không lấy lại được đâu.",
+					type : "warning",
+					showCancelButton : true,
+					confirmButtonColor : "#F44336",
+					confirmButtonText : "Chuẩn, xóa đi",
+					cancelButtonText : "Ờ, click nhầm thôi",
+					closeOnConfirm : true
+				}, function() {
+					deleteArticle($scope, $http, growlService);
+				});
 			}
 		} ]);
 
@@ -31,9 +45,9 @@ function loadArticle($scope, $http, growlService, idString) {
 						&& angular.isDefined(response.data)) {
 					$scope.obj = response.data;
 					$("#htmlEditor").code($scope.obj.attributes.content);
-					$scope.action = 2;
+					$scope.$parent.action = 2;
 				} else {
-					$scope.action = 1;
+					$scope.$parent.action = 1;
 					growlService.growl('Không tìm thấy thông tin bài viết.',
 							'warning');
 					setTimeout(function() {
@@ -43,7 +57,7 @@ function loadArticle($scope, $http, growlService, idString) {
 			});
 	arequest.error(function(data, status, headers, config) {
 		console.log(data);
-		$scope.action = 1;
+		$scope.$parent.action = 1;
 		growlService.growl('Không thể lấy thông tin bài viết.', 'danger');
 		setTimeout(function() {
 			window.location.replace("/_admin#/article/list");
@@ -54,7 +68,7 @@ function loadArticle($scope, $http, growlService, idString) {
 function saveArticle($scope, $http, growlService) {
 	$scope.obj.type = "Article";
 	var method = "POST";
-	if ($scope.action == 2) {
+	if ($scope.$parent.action == 2) {
 		method = "PUT";
 	}
 	var requestData = {
@@ -67,7 +81,7 @@ function saveArticle($scope, $http, growlService) {
 	});
 	arequest.success(function(response) {
 		$scope.obj.id = response.data.id;
-		$scope.action = 2;
+		$scope.$parent.action = 2;
 		growlService.growl('Lưu bài viết thành công.', 'success');
 	});
 	arequest
@@ -81,6 +95,26 @@ function saveArticle($scope, $http, growlService) {
 			});
 }
 
+function deleteArticle($scope, $http, growlService) {
+	var arequest = $http({
+		method : "DELETE",
+		url : "/_admin/articles?id=" + $scope.obj.id
+	});
+	arequest.success(function(response) {
+		growlService.growl('Xóa bài viết thành công !', 'success');
+		setTimeout(function() {
+			window.location.replace("/_admin#/article/list");
+		}, 1 * 1000);
+	});
+	arequest.error(function(data, status, headers, config) {
+		console.log(data);
+		growlService.growl('Không thể lấy thông tin bài viết.', 'danger');
+		setTimeout(function() {
+			window.location.replace("/_admin#/article/list");
+		}, 1 * 1000);
+	});
+}
+
 function loadUploader($scope) {
 	setTimeout(function() {
 		var uploadObj = $('#fileuploader').uploadFile({
@@ -88,6 +122,9 @@ function loadUploader($scope) {
 			multiple : true,
 			showStatusAfterSuccess : false,
 			onSuccess : function(files, resp, xhr) {
+				if (angular.isUndefined($scope.obj.attributes.photos)) {
+					$scope.obj.attributes.photos = [];
+				}
 				$scope.obj.attributes.photos.push(resp);
 				$scope.$apply(function() {
 				});

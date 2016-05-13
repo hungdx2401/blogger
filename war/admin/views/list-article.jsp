@@ -67,7 +67,7 @@
 		<div class="card-header">
 			<span>
 				<h2>
-					<small>Hiện tại hệ thống không có bài viết nào. Vui lòng <a href="" data-ui-sref="article.create" data-ng-click="mactrl.sidebarStat($event)">đăng bài</a></small>
+					<small>Hệ thống hiện tại chưa có bài viết nào. <a href="" data-ui-sref="article.create" data-ng-click="mactrl.sidebarStat($event)">Đăng bài mới</a></small>
 				</h2>
 			</span>
 		</div>

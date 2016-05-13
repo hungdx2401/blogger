@@ -129,17 +129,4 @@ materialAdmin
 	}
 
 	return gs;
-}).service('jsonApiWrapper', function() {
-	this.wrap = function(objectToWrap, type, id) {
-		var result = {};
-		var instance = {
-			type : type,
-			id : id,
-			attributes : objectToWrap
-		};
-		result = {
-			data : instance
-		}
-		return result;
-	}
 })

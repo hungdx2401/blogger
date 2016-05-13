@@ -24,17 +24,17 @@
 				<div class="col-sm-8">
 					<div class="form-group">
 						<div class="fg-line">
-							<input type="text" class="form-control" placeholder="" ng-model="obj.title">
+							<input type="text" class="form-control" placeholder="" ng-model="obj.attributes.title">
 						</div>
 					</div>
 				</div>
 			</div>
 			<p class="f-500 c-black m-b-20">Ảnh đại diện</p>
-			<div class="row" ng-show="obj.photos.length>0">
-				<div class="col-sm-6 col-md-3" ng-repeat="photo in obj.photos">
+			<div class="row" ng-show="obj.attributes.photos.length>0">
+				<div class="col-sm-6 col-md-3" ng-repeat="photo in obj.attributes.photos">
 					<div class="thumbnail">
 						<img ng-src="{{photo}}=s260-c" alt="">
-						<button class="btn btn-default btn-icon-2 waves-effect" ng-show="{{photo.length>0}}" ng-click="obj.photos.splice($index, 1)">
+						<button class="btn btn-default btn-icon-2 waves-effect" ng-show="{{photo.length>0}}" ng-click="obj.attributes.photos.splice($index, 1)">
 							<i class="md md-close"></i>
 						</button>
 					</div>
@@ -48,7 +48,7 @@
 					<div class="form-group">
 						<div class="fg-line">
 							<div class="select">
-								<select class="form-control" ng-model="obj.categoryId">
+								<select class="form-control" ng-model="obj.attributes.categoryId">
 									<option value="">Chọn danh mục cho bài viết</option>
 									<option ng-repeat="category in categories" value="{{category.id}}">{{category.title}}</option>
 								</select>
@@ -61,7 +61,7 @@
 					<div class="form-group">
 						<div class="fg-line">
 							<div class="select">
-								<select class="form-control" ng-model="obj.eventId">
+								<select class="form-control" ng-model="obj.attributes.eventId">
 									<option value="">Gắn bài viết với một sự kiện</option>
 									<option ng-repeat="event in events" value="{{event.id}}">{{event.title}}</option>
 								</select>
@@ -73,7 +73,7 @@
 			<p class="c-black f-500 m-b-5">Mô tả</p>
 			<div class="form-group">
 				<div class="fg-line">
-					<textarea class="form-control" rows="3" placeholder="" ng-model="obj.description"></textarea>
+					<textarea class="form-control" rows="3" placeholder="" ng-model="obj.attributes.description"></textarea>
 				</div>
 			</div>
 			<p class="f-500 c-black m-b-20">Nội dung</p>

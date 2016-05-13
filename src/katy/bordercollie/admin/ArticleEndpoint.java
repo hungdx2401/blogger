@@ -92,4 +92,34 @@ public class ArticleEndpoint extends HttpServlet {
 			RESTFactory.make(RESTGeneralError.BAD_REQUEST).doResponse(resp);
 		}
 	}
+
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		LOGGER.info("Gọi article endpoint, method PUT.");
+		try {
+			RESTDocumentSingle document = RESTDocumentSingle.getInstanceFromRequest(req);
+			Article article = document.getData().getInstance(Article.class);
+			Article existArticle = ofy().load().type(Article.class).id(article.getId()).now();
+			if (existArticle == null) {
+
+			}
+
+			existArticle.setCategoryId(article.getCategoryId());
+			existArticle.setContent(article.getContent());
+			existArticle.setDescription(article.getDescription());
+			existArticle.setEventId(article.getEventId());
+			existArticle.setTitle(article.getTitle());
+			existArticle.setPhotos(article.getPhotos());
+			existArticle.setTags(article.getTags());
+			existArticle.setAlias(article.getAlias());
+			existArticle.setUpdated(Calendar.getInstance().getTimeInMillis());
+
+			ofy().save().entity(existArticle).now();
+			RESTFactory.make(RESTGeneralSuccess.OK).putData(article).doResponse(resp);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace(System.err);
+			RESTFactory.make(RESTGeneralError.BAD_REQUEST).doResponse(resp);
+		}
+	}
 }

@@ -1,50 +1,47 @@
+<%@page import="java.util.Calendar"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@page import="katy.bordercollie.entity.Article"%>
+<%@page import="java.util.List"%>
 <html>
 <head>
-<?
-	var keywords = "";	
-	if(obj.getTags()!==null&&obj.getTags().size()>0){
-		for (var i=0;i<obj.getTags().size();i++)
-		{ 
-			var split =  obj.getTags().get(i).split(',');
-			if(split.length>1){
-				keywords += split[1] + ",";
-			}			
-		}
-	}
-?>
+<title>Border Collie Việt Nam</title>
+<meta name="title" content=" "/>			
+<meta name="description" content=" "/>
+<meta name="keywords" content=" "/>	
+<meta name="generator" content=" "/>
+	
+<meta property="og:url" content=" "/>
+<meta property="og:title" content=" "/>
+<meta property="og:description" content=" "/>	
+<meta property="og:image" content=" "/> 	
+<meta property="og:site_name" content=" "/>
+<meta property="fb:admins" content="100000152425373" name="100000152425373"/>	
 
-<title><?=obj.getTitle()?></title>
-<!-- All in One SEO Pack 2.1.6 by Michael Torbert of Semper Fi Web Design[584,680] -->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="title" content="<?=obj.getTitle()?>"/>
-<meta name="description" content="<?=obj.getDescription()?>" />
-<meta name="keywords" content="<?=keywords?>" />
-
-<link rel="canonical" href="<?=page_url?>" />
-<meta property="og:title" content="<?=obj.getTitle()?>" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="<?=page_url?>" />
-<meta property="og:image" content="<?=obj.getThumbnail()?>" />
-<meta property="og:site_name" content="<?=setting.getSiteName()?>" />
-<meta property="fb:admins" content="100000152425373" />
-<meta property="og:description" content="<?=obj.getDescription()?>" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:description" content="<?=obj.getDescription()?>" />
-<!-- /all in one seo pack -->
-
-<link rel="stylesheet" type="text/css" href="/bulk-template/default/css/bootstrap.css" />
-<link rel="stylesheet" type="text/css" href="/bulk-template/default/css/style.css" />
-<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js?ver=3.4.1'></script>
-<script src="/bulk-template/default/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js?ver=3.4.1'></script>
+<script src="/js/bootstrap.min.js"></script>
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
-  <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 <!-- css3-mediaqueries.js for IE less than 9 -->
 <!--[if lt IE 9]>
-    <script src="//css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 <![endif]-->
+<script>
+	$(document).ready(function() {
+		$("#searchForm .icon-search").click(function(){		
+			if($("#searchForm input, #searchForm .icon-search").hasClass("active")) {
+				$("#searchForm input, #searchForm .icon-search").removeClass("active");
+			} else {
+				$("#searchForm input, #searchForm .icon-search").addClass("active");
+			}	
+		})
+	});
+</script>
 </head>
 
 <body>
@@ -53,20 +50,18 @@
 	================================================== -->
     <div id="master">
         	
-        <!-- header
-        ================================================== -->
-        <header id="header">
+       <header id="header">
             
             <!-- logo & slogan -->
-           <hgroup>
-                <h1 class="site-title"><a href="/" title="<?=setting.getSiteTitle()?>"><?=setting.getSiteName()?></a></h1>
-                <h2 class="slogan"><?=setting.getSiteTitle()?></h2>
+            <hgroup>
+                <h1 class="site-title"><a href="/" title="">Border Collie Việt Nam</a></h1>
+                <h2 class="slogan">Đừng nói với tôi bạn có một chú chó nếu chưa từng sở hữu một border collie</h2>
             </hgroup>
             
             <!-- navigation -->
             <nav>
             	<div class="container">
-                   <ul id="mainMenu" class="clearafter">
+                    <ul id="mainMenu" class="clearafter">
                         <li><a href="/" title="Home Page">Home</a></li>
                         <li><a href="/rss" title="Stay updated via RSS">Rss</a></li>
                         <li><a href="/sitemap.xml" title="Site map">Site Map</a></li>                       
@@ -75,7 +70,11 @@
                 </div>
             </nav>
         </header>
-                    
+ <%
+    Article article = (Article)request.getAttribute("article"); 	
+ 	Calendar cal = Calendar.getInstance();
+ 	cal.setTimeInMillis(article.getUpdated());
+ %>                       
                     
         <!-- main content
         ================================================== -->
@@ -90,32 +89,30 @@
                             <article>
                                 <header>
                                     <div class="postDate">
-                                        <time pubdate="" datetime="<?=obj.getDate()?>">
-                                            <a href="/time/date-<?=obj.getMonth()?>-<?=obj.getDay()?>-<?=obj.getYear()?>" title="Date <?=obj.getDate()?>"><?=obj.getDate()?></a>
+                                        <time pubdate="" datetime="<%=article.getDoc()%>">
+                                            <a href="/time/date-<%=article.getDoc()%>" title="Date <%=article.getDoc()%>">
+                                            	Ngày <%=cal.get(Calendar.DATE)%> tháng <%=cal.get(Calendar.MONTH)%>, <%=cal.get(Calendar.YEAR)%>		                                            			                                            	
+                                            </a>
                                         </time>
                                     </div>
-                                    <h2 class="title"><a href="/<?=obj.getAlias()?>.html"> <?=obj.getTitle()?></a></h2>
+                                    <h2 class="title"><a href="#"> <%=article.getTitle() %></a></h2>
                                     <div class="meta">
-                                        <div class="category">Posted in <a href="/category/<?=obj.getCategoryAlias()?>"><?=obj.getCategoryTitle()?></a></div>
-                                        <div class="category">Tag : 
-                                        <?
-                                        	if(obj.getTags()!==null&&obj.getTags().size()>0){
-	                                        	for (var i=0;i<obj.getTags().size();i++)
-												{ 
-													var split =  obj.getTags().get(i).split(',');
-													if(split.length>1){
-											?>
-												<a href="/tag/<?=split[0]?>"><?=split[1]?></a>, 
-											<?							
-													}					
-												}
-											}
-                                        ?>                                        
+                                        <div class="category">Posted by <a href="/category/"><%=article.getCreatedBy() %></a></div>
+                                        <div class="category">Tag :                                                                                
                                         </div>                                    
                                     </div>                                
-                                </header>                                
+                                </header>  
+                                <div class="postThumb"><a href="/articles/detail?id=<%=article.getId()%>">
+									<%
+										if(article.getPhotos()!=null&&article.getPhotos().size()>0){
+									%>
+										<img src="<%=article.getPhotos().get(0) %>" /></a>
+									<%
+										}
+									%>											
+								</div>                              
                                 <div class="postContent">
-                                	<?=obj.getContent()?>
+                                	<%=article.getContent() %>
                                 </div>
                             </article>        
                             

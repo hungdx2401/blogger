@@ -98,16 +98,16 @@
 		                                    <div class="postDate">
 		                                        <time pubdate="" datetime="<%=article.getDoc()%>">
 		                                            <a href="/time/date-<%=article.getDoc()%>" title="Date <%=article.getDoc()%>">
-		                                            	<%=cal.get(Calendar.DATE)%>/<%=cal.get(Calendar.MONTH)%>/<%=cal.get(Calendar.YEAR)%>		                                            			                                            	
+		                                            	Ngày <%=cal.get(Calendar.DATE)%> tháng <%=cal.get(Calendar.MONTH)%>, <%=cal.get(Calendar.YEAR)%>		                                            			                                            	
 		                                            </a>
 		                                        </time>
 		                                    </div>
-		                                    <h2 class="title"><a href="/<%=article.getId()%>.html"><%=article.getTitle()%></a></h2>
+		                                    <h2 class="title"><a href="/articles/detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></h2>
 		                                    <div class="meta">
-		                                        <div class="category">Posted in <a href="/category/<?=list_article.get(i).getCategoryAlias()?>"><?=list_article.get(i).getCategoryTitle()?></a></div>                                    
+		                                        <div class="category">Posted by <a href="/category/"><%=article.getCreatedBy() %></a></div>                                    
 		                                    </div>                                
 		                                </header>		                               
-										<div class="postThumb"><a href="/<%=article.getId() %>.html">
+										<div class="postThumb"><a href="/articles/detail?id=<%=article.getId()%>">
 											<%
 												if(article.getPhotos()!=null&&article.getPhotos().size()>0){
 											%>

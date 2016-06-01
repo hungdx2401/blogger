@@ -2,6 +2,16 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+
+	<!--Start Of Client Servlet -->
+	<servlet>
+		<servlet-name>DetailServlet</servlet-name>
+		<servlet-class>katy.bordercollie.controller.DetailServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DetailServlet</servlet-name>
+		<url-pattern>/articles/detail</url-pattern>		
+	</servlet-mapping>
 	<servlet>
 		<servlet-name>HomeServlet</servlet-name>
 		<servlet-class>katy.bordercollie.controller.HomeServlet</servlet-class>
@@ -11,6 +21,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/articles/list</url-pattern>
 		<url-pattern>/home</url-pattern>
 	</servlet-mapping>
+	<!--End Of Client Servlet -->
 
 
 	<servlet>

@@ -25,7 +25,7 @@
 				<tr ng-repeat="obj in listArticle">
 					<td>{{((page-1)*limit + 1) + $index}}</td>
 					<td>{{obj.attributes.title}}</td>
-					<td>{{obj.attributes.createdBy}}</td>
+					<td>{{obj.attributes.createdBy.replace('@gmail.com','')}}</td>
 					<td>{{obj.attributes.updated | date:'dd/MM/yyyy HH:mm'}}</td>
 					<td><a href="#/article/edit?id={{obj.id}}"><button class="btn btn-icon command-edit" type="button">
 								<span class="md md-edit"></span>

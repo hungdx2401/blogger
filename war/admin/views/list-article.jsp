@@ -16,7 +16,7 @@
 				<tr>
 					<th>STT</th>
 					<th>Tiêu đề</th>
-					<th>Ngày đăng</th>
+					<th>Người đăng</th>
 					<th>Ngày cập nhật</th>
 					<th>Thao tác</th>
 				</tr>
@@ -25,7 +25,7 @@
 				<tr ng-repeat="obj in listArticle">
 					<td>{{((page-1)*limit + 1) + $index}}</td>
 					<td>{{obj.attributes.title}}</td>
-					<td>{{obj.attributes.doc | date:'dd/MM/yyyy HH:mm'}}</td>
+					<td>{{obj.attributes.createdBy}}</td>
 					<td>{{obj.attributes.updated | date:'dd/MM/yyyy HH:mm'}}</td>
 					<td><a href="#/article/edit?id={{obj.id}}"><button class="btn btn-icon command-edit" type="button">
 								<span class="md md-edit"></span>

@@ -4,8 +4,7 @@ materialAdmin.controller("listArticleCtrl", [
 		'$state',
 		'growlService',
 		function($scope, $http, $state, growlService) {
-			$scope.$parent.action = 0;
-			$scope.listArticle = [];
+			$scope.$parent.action = 0;			
 			$scope.limit = 10;
 			$scope.page = 1;
 			$scope.totalPage = 1;

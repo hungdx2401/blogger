@@ -3,6 +3,17 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet>
+		<servlet-name>HomeServlet</servlet-name>
+		<servlet-class>katy.bordercollie.controller.HomeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HomeServlet</servlet-name>
+		<url-pattern>/articles/list</url-pattern>
+		<url-pattern>/home</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
 		<servlet-name>GetUploadUrlServlet</servlet-name>
 		<servlet-class>katy.bordercollie.blobstore.GetUploadUrlServlet</servlet-class>
 	</servlet>
@@ -19,8 +30,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/_blobstore/upload</url-pattern>
 	</servlet-mapping>
 
-
-	<!-- Client -->
 	<servlet>
 		<servlet-name>ArticleEndpoint</servlet-name>
 		<servlet-class>katy.bordercollie.admin.ArticleEndpoint</servlet-class>
@@ -70,7 +79,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 
 	<welcome-file-list>
 		<welcome-file>
-			Admin Home
+			HomeServlet
 		</welcome-file>
 	</welcome-file-list>
 </web-app>

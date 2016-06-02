@@ -135,6 +135,8 @@
 	<!-- Controllers -->
 	<script src="/admin/js/controllers/list-article-controller.js"></script>
 	<script src="/admin/js/controllers/article-controller.js"></script>
+	<script src="/admin/js/controllers/list-category-controller.js"></script>
+	<script src="/admin/js/controllers/category-controller.js"></script>
 
 </body>
 </html>

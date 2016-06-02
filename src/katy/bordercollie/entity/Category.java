@@ -17,10 +17,28 @@ public class Category {
 	private String thumbnail;
 	@Index
 	private long doc;
+	@Index
+	private String createdBy;
 	@Unindex
 	private long updated;
 	@Index
 	private int status;
+
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
 
 	public String getId() {
 		return id;

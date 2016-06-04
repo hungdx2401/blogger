@@ -2,7 +2,8 @@ materialAdmin.controller("articleCtrl", [ '$scope', '$http', '$location',
 		'$state', 'growlService',
 		function($scope, $http, $location, $state, growlService) {
 			var idString = $location.search().id;
-			$scope.$parent.action = 1;
+			$scope.$parent.action = 1;			
+			loadCategories($scope, $http);
 			if (angular.isDefined(idString) && idString.length > 0) {
 				loadArticle($scope, $http, growlService, idString);
 			} else {
@@ -13,7 +14,7 @@ materialAdmin.controller("articleCtrl", [ '$scope', '$http', '$location',
 				};
 				$scope.$parent.action = 1;
 			}
-			loadUploader($scope);
+			loadUploaderArticle($scope);
 			$scope.save = function() {
 				$scope.obj.attributes.content = $("#htmlEditor").code();
 				saveArticle($scope, $http, growlService);
@@ -33,6 +34,24 @@ materialAdmin.controller("articleCtrl", [ '$scope', '$http', '$location',
 				});
 			}
 		} ]);
+
+function loadCategories($scope, $http) {	
+	var arequest = $http({
+		method : "GET",
+		url : "/_admin/categories?page=1&limit=20"
+	});
+	arequest.success(function(response) {
+		if (angular.isDefined(response) && angular.isDefined(response.data)) {
+			$scope.categories = response.data;
+		}
+	});
+	arequest.error(function(data, status, headers, config) {
+		console.log(data);
+		growlService.growl(
+				'Không thể lấy danh sách danh mục, vui lòng thử lại sau !',
+				'danger');
+	});
+}
 
 function loadArticle($scope, $http, growlService, idString) {
 	var arequest = $http({
@@ -115,7 +134,7 @@ function deleteArticle($scope, $http, growlService) {
 	});
 }
 
-function loadUploader($scope) {
+function loadUploaderArticle($scope) {
 	setTimeout(function() {
 		var uploadObj = $('#fileuploader').uploadFile({
 			fileName : 'logo',

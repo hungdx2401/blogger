@@ -50,7 +50,7 @@
 							<div class="select">
 								<select class="form-control" ng-model="obj.attributes.categoryId">
 									<option value="">Chọn danh mục cho bài viết</option>
-									<option ng-repeat="category in categories" value="{{category.id}}">{{category.title}}</option>
+									<option ng-repeat="category in categories" value="{{category.id}}" ng-selected="obj.attributes.categoryId.length>0&&category.id===obj.attributes.categoryId">{{category.attributes.title}}</option>
 								</select>
 							</div>
 						</div>

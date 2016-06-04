@@ -23,6 +23,9 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
 <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js?ver=3.4.1'></script>
 <script src="/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/css/blueimp-gallery.min.css">
+
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -84,16 +87,31 @@
                                         <div class="category">Tag :                                                                                
                                         </div>                                    
                                     </div>                                
-                                </header>  
-                                <div class="postThumb"><a href="/articles/detail?id=<%=article.getId()%>">
+                                </header>                                                 
+								
+								<!-- The Gallery as lightbox dialog, should be a child element of the document body -->
+								<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+								    <div class="slides"></div>
+								    <h3 class="title"></h3>
+								    <a class="prev">‹</a>
+								    <a class="next">›</a>
+								    <a class="close">×</a>
+								    <a class="play-pause"></a>
+								    <ol class="indicator"></ol>
+								</div>
+								
+								<div id="links">
 									<%
-										if(article.getPhotos()!=null&&article.getPhotos().size()>0){
+										for(String photo:article.getPhotos()){
 									%>
-										<img src="<%=article.getPhotos().get(0) %>" /></a>
-									<%
+								    <a href="<%=photo %>" title="Banana">
+								        <img src="<%=photo %>=s170" alt="Banana">
+								    </a>										
+								    <%
 										}
-									%>											
-								</div>                              
+								    %>    
+								</div>
+								         
                                 <div class="postContent">
                                 	<%=article.getContent() %>
                                 </div>
@@ -145,6 +163,18 @@
 
 		
         <?=setting.getAnalytic()?>
+        
+        <script src="/js/blueimp-gallery.min.js"></script>	
+		<script>
+		document.getElementById('links').onclick = function (event) {
+		    event = event || window.event;
+		    var target = event.target || event.srcElement,
+		        link = target.src ? target.parentNode : target,
+		        options = {index: link, event: event},
+		        links = this.getElementsByTagName('a');
+		    blueimp.Gallery(links, options);
+		};
+		</script>
             
         <!-- footer
         ================================================== -->

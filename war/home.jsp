@@ -1,3 +1,4 @@
+<%@page import="katy.bordercollie.entity.Category"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -22,8 +23,8 @@
 
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
-<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js?ver=3.4.1'></script>
 <script src="/js/bootstrap.min.js"></script>
+
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -43,6 +44,7 @@
 		})
 	});
 </script>
+
 </head>
 
 <body>
@@ -57,6 +59,7 @@
  
  <%
  	List<Article> listArticle = (List<Article>)request.getAttribute("listArticle");
+    List<Category> listCategory = (List<Category>)request.getAttribute("listCategory"); 	
  	boolean hasNextPage = (Boolean)request.getAttribute("hasNextPage");
  	int currentPage = (Integer)request.getAttribute("page");
  %>                   
@@ -86,7 +89,16 @@
 		                                    </div>
 		                                    <h2 class="title"><a href="/articles/detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></h2>
 		                                    <div class="meta">
-		                                        <div class="category">Đăng bởi <a href="/category/"><%=article.getCreatedBy().replace("@gmail.com", "") %></a></div>                                    
+		                                        <div class="category">Đăng bởi <a href="/author/"><%=article.getCreatedBy().replace("@gmail.com", "") %></a></div>
+		                                        <%
+		                                        	for(Category cate:listCategory){
+		                                        		if(cate.getId().equals(article.getCategoryId())){
+		                                        			%>
+		                                        			<div class="category">Danh mục <a href="/category/<%=cate.getId()%>"><%=cate.getTitle() %></a></div>			
+		                                        			<%
+		                                        		}
+		                                        	}
+		                                        %>		                                                                            
 		                                    </div>                                
 		                                </header>		                               
 										<div class="postThumb"><a href="/articles/detail?id=<%=article.getId()%>">
@@ -97,7 +109,8 @@
 											<%
 												}
 											%>											
-										</div>
+										</div>																																								
+																														
 		                                <p class="postDesc"><%=article.getDescription() %></p>
 		                            </article>																
 							<%
@@ -151,7 +164,7 @@
 		<!-- AddThis Smart Layers END -->
 
 		
-        <?=setting.getAnalytic()?>
+        <?=setting.getAnalytic()?>                		
         
         <!-- footer
         ================================================== -->

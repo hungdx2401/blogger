@@ -101,7 +101,7 @@
 		</li>
 
 		<li data-ui-sref-active="active">
-			<a data-ui-sref="home" data-ng-click="mactrl.sidebarStat($event)"> <i class="md md-home"></i> Về trang chủ
+			<a target="blank" href="/"> <i class="md md-home"></i> Về trang chủ
 			</a>
 		</li>
 	</ul>

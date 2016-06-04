@@ -1,7 +1,10 @@
+<%@page import="katy.bordercollie.entity.Category"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!-- sidebar
-					================================================== -->
+ <%
+ 	List<Category> listCategory = (List<Category>)request.getAttribute("listCategory"); 	
+ %>    
 <aside class="span4">
 	<div id="sidebar">
 		<div class="box">
@@ -36,27 +39,32 @@
 				</ul>
 			</div>
 		</div>
+		
+		<%
+			if(listCategory!=null&&listCategory.size()>0){
+		%>
 		<div class="box categories">
 			<h3 class="boxTitle">Danh mục</h3>
 			<div class="boxContent">
 				<ul class="clearafter">
-					<?
-											for (var i=0;i<list_category.size();i++)
-											{ 
-										?>
+					<%
+						for(Category category: listCategory){
+					%>
 					<li>
-						<a href="/category/<?=list_category.get(i).getAlias()?>">
-							<?=list_category.get(i).getTitle()?>
+						<a href="/category/<%=category.getId()%>">
+							<%=category.getTitle() %>
 						</a>
 					</li>
-					<?
-											}
-										?>
-
+					<%
+						}
+					%>
 				</ul>
 			</div>
 		</div>
-		<div class="box tags">
+		<%
+			}
+		%>
+		<%-- <div class="box tags">
 			<h3 class="boxTitle">Tags</h3>
 			<div class="boxContent clearafter">
 				<?
@@ -72,6 +80,6 @@
 									?>
 
 			</div>
-		</div>
+		</div> --%>
 	</div>
 </aside>

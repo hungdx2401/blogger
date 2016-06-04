@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import katy.bordercollie.entity.Article;
+import katy.bordercollie.entity.Category;
 
 @SuppressWarnings("serial")
 public class HomeServlet extends HttpServlet {
@@ -31,12 +32,16 @@ public class HomeServlet extends HttpServlet {
 
 			List<Article> listArticle = ofy().load().type(Article.class).limit(limit + 1).offset((page - 1) * limit)
 					.filter("status in", Arrays.asList(1, 2, 3)).order("-doc").list();
+
+			List<Category> listCategory = ofy().load().type(Category.class).list();
+
 			boolean hasNextPage = listArticle.size() > limit;
 			if (hasNextPage) {
 				listArticle.remove(listArticle.size() - 1);
 			}
 
 			req.setAttribute("listArticle", listArticle);
+			req.setAttribute("listCategory", listCategory);
 			req.setAttribute("page", page);
 			req.setAttribute("hasNextPage", hasNextPage);
 			req.setAttribute("serverName", req.getServerName());

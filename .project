@@ -45,7 +45,7 @@
 		<link>
 			<name>appengine-rest-java</name>
 			<type>2</type>
-			<location>/home/xuanhung/workspace/appengine-rest-java/src</location>
+			<location>E:/workspace/rest-java/src</location>
 		</link>
 	</linkedResources>
 </projectDescription>

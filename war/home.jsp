@@ -25,8 +25,6 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
 <script src="/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="/css/blueimp-gallery.min.css">
-
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -104,28 +102,9 @@
 		                                    </div>                                
 		                                </header>		                               																		
 										
-										<!-- The Gallery as inline carousel, can be positioned anywhere on the page -->
-										<div id="blueimp-gallery-carousel" class="blueimp-gallery blueimp-gallery-carousel">
-										    <div class="slides"></div>
-										    <h3 class="title"></h3>
-										    <a class="prev">‹</a>
-										    <a class="next">›</a>
-										    <a class="play-pause"></a>
-										    <ol class="indicator"></ol>
-										</div>
-										
-										
-										<div id="links">
-											<%
-												for(String photo:article.getPhotos()){
-											%>
-										    <a href="<%=photo %>" title="Banana">
-										        <img src="<%=photo %>=s50" alt="Banana">
-										    </a>										
-										    <%
-												}
-										    %>    
-										</div>
+										<div class="postThumb">
+											<a href=""><img src="<%=article.getPhotos().get(0) %>" /></a>
+										</div>																													
 										
 		                                <p class="postDesc"><%=article.getDescription() %></p>
 		                            </article>																
@@ -180,18 +159,7 @@
 		<!-- AddThis Smart Layers END -->
 
 		
-        <?=setting.getAnalytic()?>
-                
-		<script src="/js/blueimp-gallery.min.js"></script>	
-		<script>
-		blueimp.Gallery(
-			    document.getElementById('links').getElementsByTagName('a'),
-			    {
-			        container: '#blueimp-gallery-carousel',
-			        carousel: true
-			    }
-			);
-		</script>
+        <?=setting.getAnalytic()?>                		
         
         <!-- footer
         ================================================== -->

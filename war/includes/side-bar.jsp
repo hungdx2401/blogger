@@ -7,6 +7,9 @@
  %>    
 <aside class="span4">
 	<div id="sidebar">
+		<div>
+			<img alt="" src="/images/kem-logo.png">
+		</div>
 		<div class="box">
 			<form action="" method="get" onsubmit="location.href='/search/' + encodeURIComponent(this.search.value).replace(/ /g, '+'); return false;" class="form-inline">
 				<input type="text" class="input-block-level" name="search" id="s" placeholder="Tìm kiếm">

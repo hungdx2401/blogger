@@ -59,7 +59,7 @@
  
  <%
  	List<Article> listArticle = (List<Article>)request.getAttribute("listArticle");
-    List<Category> listCategory = (List<Category>)request.getAttribute("listCategory"); 	
+    List<Category> categories = (List<Category>)request.getAttribute("categories"); 	
  	boolean hasNextPage = (Boolean)request.getAttribute("hasNextPage");
  	int currentPage = (Integer)request.getAttribute("page");
  %>                   
@@ -91,7 +91,7 @@
 		                                    <div class="meta">
 		                                        <div class="category">Đăng bởi <a href="/author/"><%=article.getCreatedBy().replace("@gmail.com", "") %></a></div>
 		                                        <%
-		                                        	for(Category cate:listCategory){
+		                                        	for(Category cate:categories){
 		                                        		if(cate.getId().equals(article.getCategoryId())){
 		                                        			%>
 		                                        			<div class="category">Danh mục <a href="/category/<%=cate.getId()%>"><%=cate.getTitle() %></a></div>			

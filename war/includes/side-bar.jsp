@@ -1,10 +1,12 @@
+<%@page import="java.util.Collections"%>
+<%@page import="java.util.Collection"%>
+<%@page import="java.util.Map.Entry"%>
+<%@page import="katy.bordercollie.helper.StaticItem"%>
+<%@page import="katy.bordercollie.entity.Article"%>
 <%@page import="katy.bordercollie.entity.Category"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
- <%
- 	List<Category> listCategory = (List<Category>)request.getAttribute("listCategory"); 	
- %>    
 <aside class="span4">
 	<div id="sidebar">
 		<div>
@@ -15,43 +17,49 @@
 				<input type="text" class="input-block-level" name="search" id="s" placeholder="Tìm kiếm">
 			</form>
 		</div>
+		<%
+			if(StaticItem.recents!=null&&StaticItem.recents.size()>0){
+		%>
 		<div class="box postListing">
 			<h3 class="boxTitle">Đang được theo dõi</h3>
 			<div class="boxContent">
 				<ul>
-					<?
-											for (var i=0;i<list_recent_view.size();i++)
-											{ 
-										?>
+					<%					
+						for(Article article: StaticItem.getListRecents()){							
+					%>					
 					<li class="row-fluid">
 						<div class="span3">
-							<img class="img-full-width" src="<?=list_recent_view.get(i).getThumbnail()?>" />
+							<img class="img-full-width" src="<%=article.getPhotos().get(0) %>" /> 
 						</div>
 						<div class="span9">
-							<a href="/<?=list_recent_view.get(i).getAlias()?>.html" class="title">
-								<?=list_recent_view.get(i).getTitle()?>
-							</a> <a class="published" href="/time/date-<?=list_recent_view.get(i).getMonth()?>-<?=list_recent_view.get(i).getDay()?>-<?=list_recent_view.get(i).getYear()?>"
+							<a href="//articles/detail?id=<%=article.getId() %>" class="title">
+								<%=article.getTitle() %>
+							</a> 
+							Đăng ngày: <a class="published" href="/time/date-<?=list_recent_view.get(i).getMonth()?>-<?=list_recent_view.get(i).getDay()?>-<?=list_recent_view.get(i).getYear()?>"
 								title="Date <?=list_recent_view.get(i).getDate()?>">
-								<?=list_recent_view.get(i).getDate()?>
+								<%=article.getFormatedDoc() %>
 							</a>
 						</div>
 					</li>
-					<?
-											}
-										?>
+					<%
+						}
+					%>
 				</ul>
 			</div>
 		</div>
+		<%
+			}
+		%>
 		
 		<%
-			if(listCategory!=null&&listCategory.size()>0){
+			if(StaticItem.categories!=null&&StaticItem.categories.size()>0){
 		%>
 		<div class="box categories">
 			<h3 class="boxTitle">Danh mục</h3>
 			<div class="boxContent">
 				<ul class="clearafter">
 					<%
-						for(Category category: listCategory){
+						for(Category category: StaticItem.categories){
 					%>
 					<li>
 						<a href="/category/<%=category.getId()%>">

@@ -1,6 +1,8 @@
 package katy.bordercollie.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
@@ -145,6 +147,16 @@ public class Article {
 
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
+	}
+
+	public String getFormatedDoc() {
+		if (this.doc == 0) {
+			return null;
+		}
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(this.doc);
+		SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
+		return formater.format(cal.getTime());
 	}
 
 }

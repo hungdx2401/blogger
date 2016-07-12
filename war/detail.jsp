@@ -4,19 +4,24 @@
 <!DOCTYPE html>
 <%@page import="katy.bordercollie.entity.Article"%>
 <%@page import="java.util.List"%>
+ <%
+    Article article = (Article)request.getAttribute("article"); 	
+ 	Calendar cal = Calendar.getInstance();
+ 	cal.setTimeInMillis(article.getUpdated());
+ %>  
 <html>
 <head>
-<title>Border Collie Việt Nam</title>
-<meta name="title" content=" "/>			
-<meta name="description" content=" "/>
-<meta name="keywords" content=" "/>	
-<meta name="generator" content=" "/>
+<title><%=article.getTitle() %> | Border Collie Việt Nam</title>
+<meta name="title" content="<%=article.getTitle() %>"/>			
+<meta name="description" content="<%=article.getDescription()%>"/>
+<meta name="keywords" content="border collie việt nam, border collie, chó thông minh"/>	
 	
-<meta property="og:url" content=" "/>
-<meta property="og:title" content=" "/>
-<meta property="og:description" content=" "/>	
-<meta property="og:image" content=" "/> 	
-<meta property="og:site_name" content=" "/>
+<meta property="og:url" content=""/>
+<meta property="og:title" content="<%=article.getTitle() %>"/>
+<meta property="og:type" content="article" />
+<meta property="og:description" content="<%=article.getDescription()%>"/>	
+<meta property="og:image" content="<%=article.getPhotos().get(0)%>"/> 	
+<meta property="og:site_name" content="Border Collie Việt Nam"/>
 <meta property="fb:admins" content="100000152425373" name="100000152425373"/>	
 
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
@@ -63,12 +68,7 @@
         	
        <!-- header
         ================================================== -->
-         <jsp:include page="/includes/top.jsp"/>
- <%
-    Article article = (Article)request.getAttribute("article"); 	
- 	Calendar cal = Calendar.getInstance();
- 	cal.setTimeInMillis(article.getUpdated());
- %>                       
+         <jsp:include page="/includes/top.jsp"/>                    
                     
         <!-- main content
         ================================================== -->
@@ -95,8 +95,10 @@
                                         <div class="category">Tag :                                                                                
                                         </div>                                    
                                     </div>                                
-                                </header>                                                 
-								
+                                </header>                                                 								
+								<%
+									if(article.getPhotos().size()>1){
+								%>
 								<!-- The Gallery as lightbox dialog, should be a child element of the document body -->
 								<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
 								    <div class="slides"></div>
@@ -106,20 +108,22 @@
 								    <a class="close">×</a>
 								    <a class="play-pause"></a>
 								    <ol class="indicator"></ol>
-								</div>
-								
+								</div>								
 								<div id="links">
 									<%
 										for(String photo:article.getPhotos()){
 									%>
 								    <a href="<%=photo %>" title="Banana">
-								        <img src="<%=photo %>=s170" alt="Banana">
+								        <img src="<%=photo %>=s170-c" alt="Banana">
 								    </a>										
 								    <%
 										}
 								    %>    
 								</div>
-								         
+								<br>  
+								<%
+									}
+								%>								       
                                 <div class="postContent">
                                 	<%=article.getContent() %>
                                 </div>

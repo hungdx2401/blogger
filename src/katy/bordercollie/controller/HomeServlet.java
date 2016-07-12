@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import katy.bordercollie.entity.Article;
-import katy.bordercollie.helper.StaticItem;
 
 @SuppressWarnings("serial")
 public class HomeServlet extends HttpServlet {
@@ -39,14 +38,10 @@ public class HomeServlet extends HttpServlet {
 			}
 
 			req.setAttribute("listArticle", listArticle);
-			req.setAttribute("categories", StaticItem.categories);
 			req.setAttribute("page", page);
 			req.setAttribute("hasNextPage", hasNextPage);
 			req.setAttribute("serverName", req.getServerName());
 			req.setAttribute("requestUrl", req.getRequestURL().toString());
-			req.setAttribute("page", page);
-			req.setAttribute("page", page);
-			req.setAttribute("page", page);
 
 			req.getRequestDispatcher("/home.jsp").forward(req, resp);
 		} catch (Exception e) {

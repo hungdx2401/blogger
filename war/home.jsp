@@ -1,3 +1,4 @@
+<%@page import="katy.bordercollie.helper.StaticItem"%>
 <%@page import="katy.bordercollie.entity.Category"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -58,8 +59,7 @@
          <jsp:include page="/includes/top.jsp"/>
  
  <%
- 	List<Article> listArticle = (List<Article>)request.getAttribute("listArticle");
-    List<Category> categories = (List<Category>)request.getAttribute("categories"); 	
+ 	List<Article> listArticle = (List<Article>)request.getAttribute("listArticle");   
  	boolean hasNextPage = (Boolean)request.getAttribute("hasNextPage");
  	int currentPage = (Integer)request.getAttribute("page");
  %>                   
@@ -91,22 +91,24 @@
 		                                    <div class="meta">
 		                                        <div class="category">Đăng bởi <a href="/author/"><%=article.getCreatedBy().replace("@gmail.com", "") %></a></div>
 		                                        <%
-		                                        	for(Category cate:categories){
-		                                        		if(cate.getId().equals(article.getCategoryId())){
-		                                        			%>
-		                                        			<div class="category">Danh mục <a href="/category/<%=cate.getId()%>"><%=cate.getTitle() %></a></div>			
-		                                        			<%
+		                                        	if(article.getCategoryId()!=null){
+		                                        		Category cate = StaticItem.mapCategory.get(article.getCategoryId());
+		                                        		if(cate!=null){
+                                        			%>
+                                        			<div class="category">Danh mục <a href="/category/<%=cate.getId()%>"><%=cate.getTitle() %></a></div>			
+                                        			<%
 		                                        		}
-		                                        	}
+                                        		}
 		                                        %>		                                                                            
 		                                    </div>                                
 		                                </header>		                               																		
 										
 										<div class="postThumb">
-											<a href=""><img src="<%=article.getPhotos().get(0) %>" /></a>
-										</div>																													
-										
+											<a href="/articles/detail?id=<%=article.getId()%>"><img src="<%=article.getPhotos().get(0) %>" /></a>
+										</div>																																							
 		                                <p class="postDesc"><%=article.getDescription() %></p>
+		                                <a style="float:right;" href="/articles/detail?id=<%=article.getId()%>">Đọc tiếp &gt;&gt;&nbsp;</a>
+		                                <br>
 		                            </article>																
 							<%
                             	}

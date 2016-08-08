@@ -89,7 +89,7 @@
 		                                    </div>
 		                                    <h2 class="title"><a href="/articles/detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></h2>
 		                                    <div class="meta">
-		                                        <div class="category">Đăng bởi <a href="/author/"><%=article.getCreatedBy().replace("@gmail.com", "") %></a></div>
+		                                        <div class="category">Đăng bởi <a href="/author/<%=article.getCreatedBy()%>"><%=article.getCreatedBy()%></a></div>
 		                                        <%
 		                                        	if(article.getCategoryId()!=null){
 		                                        		Category cate = StaticItem.mapCategory.get(article.getCategoryId());

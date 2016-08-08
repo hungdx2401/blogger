@@ -5,22 +5,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 
 	<!--Start Of Client Servlet -->
 	<servlet>
-		<servlet-name>DetailServlet</servlet-name>
-		<servlet-class>katy.bordercollie.controller.DetailServlet</servlet-class>
+		<servlet-name>ArticleController</servlet-name>
+		<servlet-class>katy.bordercollie.controller.ArticleController</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>DetailServlet</servlet-name>
-		<url-pattern>/articles/detail</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>HomeServlet</servlet-name>
-		<servlet-class>katy.bordercollie.controller.HomeServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>HomeServlet</servlet-name>
-		<url-pattern>/articles/list</url-pattern>
+		<servlet-name>ArticleController</servlet-name>
+		<url-pattern>/articles/*</url-pattern>
 		<url-pattern>/home</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping>		
 	<!--End Of Client Servlet -->
 
 
@@ -103,7 +95,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 
 	<welcome-file-list>
 		<welcome-file>
-			HomeServlet
+			ArticleController
 		</welcome-file>
 	</welcome-file-list>
 </web-app>

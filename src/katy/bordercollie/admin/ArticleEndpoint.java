@@ -82,7 +82,7 @@ public class ArticleEndpoint extends HttpServlet {
 			article.setDoc(Calendar.getInstance().getTimeInMillis());
 			article.setUpdated(Calendar.getInstance().getTimeInMillis());
 			article.setStatus(3);
-			article.setCreatedBy(UserServiceFactory.getUserService().getCurrentUser().getEmail());
+			article.setCreatedBy(UserServiceFactory.getUserService().getCurrentUser().getNickname());
 			ofy().save().entity(article).now();
 			RESTFactory.make(RESTGeneralSuccess.CREATED).putData(article).doResponse(resp);
 		} catch (Exception e) {
@@ -111,6 +111,7 @@ public class ArticleEndpoint extends HttpServlet {
 			existArticle.setTags(article.getTags());
 			existArticle.setAlias(article.getAlias());
 			existArticle.setUpdated(Calendar.getInstance().getTimeInMillis());
+			existArticle.setCreatedBy(UserServiceFactory.getUserService().getCurrentUser().getNickname());
 			ofy().save().entity(existArticle).now();
 			RESTFactory.make(RESTGeneralSuccess.OK).putData(article).doResponse(resp);
 		} catch (Exception e) {

@@ -1,3 +1,5 @@
+<%@page import="katy.bordercollie.helper.StaticItem"%>
+<%@page import="katy.bordercollie.entity.Category"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -91,9 +93,17 @@
                                     </div>
                                     <h2 class="title"><a href="#"> <%=article.getTitle() %></a></h2>
                                     <div class="meta">
-                                        <div class="category">Đăng bởi <a href="/category/"><%=article.getCreatedBy().replace("@gmail.com", "") %></a></div>
-                                        <div class="category">Tag :                                                                                
-                                        </div>                                    
+                                        <div class="category">Đăng bởi <a href="/author/<%=article.getCreatedBy()%>"><%=article.getCreatedBy() %></a></div>
+                                         <%
+                                        	if(article.getCategoryId()!=null){
+                                        		Category cate = StaticItem.mapCategory.get(article.getCategoryId());
+                                        		if(cate!=null){
+                                      			%>
+                                      			<div class="category">Danh mục <a href="/category/<%=cate.getId()%>"><%=cate.getTitle() %></a></div>			
+                                      			<%
+                                        		}
+                                      		}
+                                        %>	                                                                                                                                                       
                                     </div>                                
                                 </header>                                                 								
 								<%

@@ -64,43 +64,34 @@
  	boolean hasNextPage = (Boolean)request.getAttribute(ArticleController.ATTRIBUTE_HAS_NEXT);
  	int currentPage = (Integer)request.getAttribute(ArticleController.ATTRIBUTE_PAGE);
  	String url = (String)request.getAttribute(ArticleController.ATTRIBUTE_URL);
- 	String title = (String)request.getAttribute(ArticleController.ATTRIBUTE_TITLE);
- %>    
-                    
-                    
+ %>                   
         <!-- main content
         ================================================== -->
         <div id="content">
         	<div class="container">
                 <div class="row-fluid">
-   					<%
+    				<%
     					if(listArticle!=null&&listArticle.size()>0){
     				%>
                     <!-- main content
                     ================================================== -->
-                    <div id="mainContent" class="span8">                    
-                    	<div id="mainContent_inner">
-                    	<h2 class="heading"><%=title %></h2>
-	                   		<%
-	                           	Calendar cal = Calendar.getInstance();
-	                           	for(Article article: listArticle){
-	                           		cal.setTimeInMillis(article.getUpdated());
-                            %>	
-							<article>                            	 
-                                <header>
-                                    <div class="postDate">
-                                        <time pubdate="" datetime="<%=article.getDoc()%>">
-                                            <a href="/time/date-<%=article.getDoc()%>" title="Date <%=article.getDoc()%>">
-                                            	Ngày <%=cal.get(Calendar.DATE)%> tháng <%=cal.get(Calendar.MONTH)%>, <%=cal.get(Calendar.YEAR)%>		                                            			                                            	
-                                            </a>
-                                        </time>
-                                    </div>
-                                    <div class="row-fluid">										
-										<div class="span3">
-											<div class="postThumb"><a href="/articles?id=<%=article.getId()%>"><img src="<%=article.getPhotos().get(0) %>=s136-c" /></a></div>
-										</div>
-										<div class="span9">
-											<h2 class="title"><a href="/articles?id=<%=article.getId()%>"><%=article.getTitle()%></a></h2>
+                    <div id="mainContent" class="span8">
+                    	<div id="mainContent_inner">                            
+                            <%
+                            	Calendar cal = Calendar.getInstance();
+                            	for(Article article: listArticle){
+                            		cal.setTimeInMillis(article.getUpdated());
+                            %>									
+									<article>
+		                                <header>
+		                                    <div class="postDate">
+		                                        <time pubdate="" datetime="<%=article.getDoc()%>">
+		                                            <a href="/time/date-<%=article.getDoc()%>" title="Date <%=article.getDoc()%>">
+		                                            	Ngày <%=cal.get(Calendar.DATE)%> tháng <%=cal.get(Calendar.MONTH)%>, <%=cal.get(Calendar.YEAR)%>		                                            			                                            	
+		                                            </a>
+		                                        </time>
+		                                    </div>
+		                                    <h2 class="title"><a href="/articles?id=<%=article.getId()%>"><%=article.getTitle()%></a></h2>
 		                                    <div class="meta">
 		                                        <div class="category">Đăng bởi <a href="/articles?author=<%=article.getCreatedBy()%>"><%=article.getCreatedBy()%></a></div>
 		                                        <%
@@ -113,14 +104,19 @@
 		                                        		}
                                         		}
 		                                        %>		                                                                            
-		                                    </div>  
-										</div>
-									</div>
-                                </header>								
-                            </article>
-                         	<%
+		                                    </div>                                
+		                                </header>		                               																		
+										
+										<div class="postThumb">
+											<a href="/articles?id=<%=article.getId()%>"><img src="<%=article.getPhotos().get(0) %>" /></a>
+										</div>																																							
+		                                <p class="postDesc"><%=article.getDescription() %></p>
+		                                <a style="float:right;" href="/articles?id=<%=article.getId()%>">Đọc tiếp &gt;&gt;&nbsp;</a>
+		                                <br>
+		                            </article>																
+							<%
                             	}
-							%>        	                    	                                                       
+							%>
                             <ul class="pager">
                             	<%
                             		if(hasNextPage){
@@ -147,14 +143,15 @@
                     <%
     					}
                     %>
-                    <!-- sidebar
-                    ================================================== -->
-                    <jsp:include page="/includes/side-bar.jsp"/>
+                   	<!-- sidebar
+					================================================== -->
+					<jsp:include page="/includes/side-bar.jsp"/>
+					
                 </div>
             </div>
         </div>
         
-         <!-- AddThis Smart Layers BEGIN -->
+        <!-- AddThis Smart Layers BEGIN -->
 		<!-- Go to http://www.addthis.com/get/smart-layers to customize -->
 		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4df08bdf3f3b1b46"></script>
 		<script type="text/javascript">

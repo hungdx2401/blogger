@@ -30,12 +30,12 @@
 					%>					
 					<li class="row-fluid">
 						<div class="span3">
-							<a href="/articles/detail?id=<%=article.getId() %>">
+							<a href="/articles?id=<%=article.getId() %>">
 								<img class="img-full-width" src="<%=article.getPhotos().get(0) %>"/>
 							</a> 
 						</div>
 						<div class="span9">
-							<a href="/articles/detail?id=<%=article.getId() %>" class="title">
+							<a href="/articles?id=<%=article.getId() %>" class="title">
 								<%=article.getTitle() %>
 							</a> 
 							<a class="published" href="/time/date-<?=list_recent_view.get(i).getMonth()?>-<?=list_recent_view.get(i).getDay()?>-<?=list_recent_view.get(i).getYear()?>"
@@ -65,7 +65,7 @@
 						for(Entry<String,Category> entry: StaticItem.mapCategory.entrySet()){
 					%>
 					<li>
-						<a href="/category/<%=entry.getValue().getId()%>">
+						<a href="/articles?category=<%=entry.getValue().getId()%>">
 							<%=entry.getValue().getTitle() %>
 						</a>
 					</li>

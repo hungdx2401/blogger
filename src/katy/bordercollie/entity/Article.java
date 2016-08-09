@@ -94,6 +94,9 @@ public class Article {
 	}
 
 	public ArrayList<String> getPhotos() {
+		if (this.photos == null) {
+			this.photos = new ArrayList<String>();
+		}
 		return photos;
 	}
 
@@ -110,6 +113,9 @@ public class Article {
 	}
 
 	public ArrayList<String> getTags() {
+		if (this.tags == null) {
+			this.tags = new ArrayList<String>();
+		}
 		return tags;
 	}
 

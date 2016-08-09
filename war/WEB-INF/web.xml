@@ -11,6 +11,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet-mapping>
 		<servlet-name>ArticleController</servlet-name>
 		<url-pattern>/articles/*</url-pattern>
+		<url-pattern>/articles</url-pattern>
 		<url-pattern>/home</url-pattern>
 	</servlet-mapping>		
 	<!--End Of Client Servlet -->

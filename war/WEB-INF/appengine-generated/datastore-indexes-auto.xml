@@ -1,9 +1,19 @@
-<!-- Indices written at Mon, 8 Aug 2016 23:11:58 ICT -->
+<!-- Indices written at Tue, 9 Aug 2016 23:07:31 ICT -->
 
 <datastore-indexes>
 
-    <!-- Used 12 times in query history -->
+    <!-- Used 3 times in query history -->
     <datastore-index kind="Article" ancestor="false" source="auto">
+        <property name="status" direction="asc"/>
+        <property name="doc" direction="desc"/>
+    </datastore-index>
+    <datastore-index kind="Article" ancestor="false" source="manual">
+        <property name="categoryId" direction="asc"/>
+        <property name="status" direction="asc"/>
+        <property name="doc" direction="desc"/>
+    </datastore-index>
+    <datastore-index kind="Article" ancestor="false" source="manual">
+        <property name="createdBy" direction="asc"/>
         <property name="status" direction="asc"/>
         <property name="doc" direction="desc"/>
     </datastore-index>

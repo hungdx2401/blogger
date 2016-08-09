@@ -80,7 +80,7 @@
                     ================================================== -->
                     <div id="mainContent" class="span8">                    
                     	<div id="mainContent_inner">
-                    	<h2 class="heading"><%=title %></h2>
+                    	<h3 class="heading"><%=title %></h3>
 	                   		<%
 	                           	Calendar cal = Calendar.getInstance();
 	                           	for(Article article: listArticle){

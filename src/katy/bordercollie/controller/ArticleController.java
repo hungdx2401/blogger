@@ -76,7 +76,7 @@ public class ArticleController extends HttpServlet {
 
 			// Get list.
 			String view = JSP_LIST_ARTICLE;
-			String title = "Kết quả tìm kiếm theo ";
+			String title = "";
 			Query<Article> query = ofy().load().type(Article.class).filter(DB_STATUS_IN, ACCEPT_STATUS);
 			if (req.getParameter(PARAMETER_CATEGORY) != null && !req.getParameter(PARAMETER_CATEGORY).isEmpty()) {
 				Category category = ofy().load().type(Category.class).id(req.getParameter(PARAMETER_CATEGORY)).now();
@@ -85,12 +85,12 @@ public class ArticleController extends HttpServlet {
 				}
 				query = query.filter(DB_CATEGORY_ID, req.getParameter(PARAMETER_CATEGORY));
 				view = JSP_SEARCH;
-				title += "danh mục ";
+				title += "Danh mục: ";
 				title += category.getTitle();
 			} else if (req.getParameter(PARAMETER_AUTHOR) != null && !req.getParameter(PARAMETER_AUTHOR).isEmpty()) {
 				query = query.filter(DB_CREATED_BY, req.getParameter(PARAMETER_AUTHOR));
 				view = JSP_SEARCH;
-				title += "tác giả ";
+				title += "Tác giả: ";
 				title += req.getParameter(PARAMETER_AUTHOR);
 			} else if (req.getParameter(PARAMETER_TIME) != null && !req.getParameter(PARAMETER_TIME).isEmpty()) {
 				query = query.filter(DB_DOC, req.getParameter(req.getParameter(PARAMETER_TIME)));

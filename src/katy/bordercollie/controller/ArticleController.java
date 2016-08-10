@@ -42,16 +42,16 @@ public class ArticleController extends HttpServlet {
 	private static final String JSP_LIST_ARTICLE = "/list-article.jsp";
 	private static final String JSP_SEARCH = "/search.jsp";
 
-	private static final String DB_CATEGORY_ID = "categoryId";
-	private static final String DB_CREATED_BY = "createdBy";
-	private static final String DB_DOC = "doc";
-	private static final String DB_STATUS_IN = "status in";
-	private static final String DB_ORDER_BY = "-doc";
+	public static final String DB_CATEGORY_ID = "categoryId";
+	public static final String DB_CREATED_BY = "createdBy";
+	public static final String DB_DOC = "doc";
+	public static final String DB_STATUS_IN = "status in";
+	public static final String DB_ORDER_BY = "-doc";
 
 	private static final int DEFAULT_LIMIT = 10;
 	private static final int DEFAULT_PAGE = 1;
 
-	private static final List<Integer> ACCEPT_STATUS = Arrays.asList(1, 2, 3);
+	public static final List<Integer> ACCEPT_STATUS = Arrays.asList(1, 2, 3);
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		try {

@@ -13,6 +13,35 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/articles/*</url-pattern>
 		<url-pattern>/articles</url-pattern>
 		<url-pattern>/home</url-pattern>
+	</servlet-mapping>	
+	<servlet>
+		<servlet-name>AboutUs</servlet-name>
+		<jsp-file>/about-us.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AboutUs</servlet-name>
+		<url-pattern>/about-us/*</url-pattern>
+		<url-pattern>/about-us</url-pattern>		
+	</servlet-mapping>		
+	<servlet>
+		<servlet-name>RssController</servlet-name>
+		<jsp-file>/rss.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RssController</servlet-name>
+		<url-pattern>/rss/*</url-pattern>
+		<url-pattern>/rss</url-pattern>		
+	</servlet-mapping>		
+	<servlet>
+		<servlet-name>SitemapController</servlet-name>
+		<jsp-file>/site_map.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SitemapController</servlet-name>
+		<url-pattern>/sitemap.xml</url-pattern>
+		<url-pattern>/sitemap</url-pattern>	
+		<url-pattern>/site-map.xml</url-pattern>
+		<url-pattern>/site_map.xml</url-pattern>	
 	</servlet-mapping>		
 	<!--End Of Client Servlet -->
 

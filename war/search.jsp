@@ -90,7 +90,7 @@
                                 <header>
                                     <div class="postDate">
                                         <time pubdate="" datetime="<%=article.getDoc()%>">
-                                            <a href="/time/date-<%=article.getDoc()%>" title="Date <%=article.getDoc()%>">
+                                            <a href="/articles?time=<%=article.getDoc()%>" title="Date <%=article.getDoc()%>">
                                             	Ngày <%=cal.get(Calendar.DATE)%> tháng <%=cal.get(Calendar.MONTH)%>, <%=cal.get(Calendar.YEAR)%>		                                            			                                            	
                                             </a>
                                         </time>

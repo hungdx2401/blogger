@@ -38,7 +38,7 @@
 							<a href="/articles?id=<%=article.getId() %>" class="title">
 								<%=article.getTitle() %>
 							</a> 
-							<a class="published" href="/time/date-<?=list_recent_view.get(i).getMonth()?>-<?=list_recent_view.get(i).getDay()?>-<?=list_recent_view.get(i).getYear()?>"
+							<a class="published" href="/articles?time=<%=article.getDoc()%>"
 								title="Date <?=list_recent_view.get(i).getDate()?>">
 								<%=article.getFormatedDoc() %>
 							</a>

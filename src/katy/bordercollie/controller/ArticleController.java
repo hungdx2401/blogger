@@ -4,6 +4,7 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -21,6 +22,10 @@ import katy.bordercollie.helper.StaticItem;
 public class ArticleController extends HttpServlet {
 
 	private static final Logger LOGGER = Logger.getLogger(ArticleController.class.getName());
+
+	private static final String CATEGORY_SEARCH_PRE_TITLE = "Danh mục: ";
+	private static final String AUTHOR_SEARCH_PRE_TITLE = "Tác giả: ";
+	private static final String TIME_SEARCH_PRE_TITLE = "Bài viết ngày: ";
 
 	private static final String PARAMETER_ID = "id";
 	private static final String PARAMETER_CATEGORY = "category";
@@ -85,17 +90,26 @@ public class ArticleController extends HttpServlet {
 				}
 				query = query.filter(DB_CATEGORY_ID, req.getParameter(PARAMETER_CATEGORY));
 				view = JSP_SEARCH;
-				title += "Danh mục: ";
+				title += CATEGORY_SEARCH_PRE_TITLE;
 				title += category.getTitle();
 			} else if (req.getParameter(PARAMETER_AUTHOR) != null && !req.getParameter(PARAMETER_AUTHOR).isEmpty()) {
 				query = query.filter(DB_CREATED_BY, req.getParameter(PARAMETER_AUTHOR));
 				view = JSP_SEARCH;
-				title += "Tác giả: ";
+				title += AUTHOR_SEARCH_PRE_TITLE;
 				title += req.getParameter(PARAMETER_AUTHOR);
 			} else if (req.getParameter(PARAMETER_TIME) != null && !req.getParameter(PARAMETER_TIME).isEmpty()) {
-				query = query.filter(DB_DOC, req.getParameter(req.getParameter(PARAMETER_TIME)));
+				long searchTimeMLS = Long.parseLong(req.getParameter(PARAMETER_TIME));
+				Calendar searchTime = Calendar.getInstance();
+				searchTime.setTimeInMillis(searchTimeMLS);
+				Calendar startOfDate = getStartOfDay(searchTime);
+				Calendar endOfDate = getEndOfDay(searchTime);
+				query = query.filter(DB_DOC + " >=", startOfDate.getTimeInMillis());
+				query = query.filter(DB_DOC + " <", endOfDate.getTimeInMillis());
 				view = JSP_SEARCH;
-			}
+				title += TIME_SEARCH_PRE_TITLE;
+				title += searchTime.get(Calendar.DATE) + "/" + (searchTime.get(Calendar.MONTH) + 1) + "/"
+						+ searchTime.get(Calendar.YEAR);
+			}	
 
 			int limit = DEFAULT_LIMIT;
 			int page = DEFAULT_PAGE;
@@ -132,4 +146,23 @@ public class ArticleController extends HttpServlet {
 			resp.sendError(500);
 		}
 	}
+
+	private static Calendar getStartOfDay(Calendar date) {
+		Calendar startOfDate = Calendar.getInstance();
+		int year = date.get(Calendar.YEAR);
+		int month = date.get(Calendar.MONTH);
+		int day = date.get(Calendar.DATE);
+		startOfDate.set(year, month, day, 0, 0, 0);
+		return startOfDate;
+	}
+
+	private static Calendar getEndOfDay(Calendar date) {
+		Calendar endOfDate = Calendar.getInstance();
+		int year = date.get(Calendar.YEAR);
+		int month = date.get(Calendar.MONTH);
+		int day = date.get(Calendar.DATE);
+		endOfDate.set(year, month, day, 23, 59, 59);
+		return endOfDate;
+	}
+
 }

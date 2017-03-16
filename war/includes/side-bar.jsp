@@ -31,7 +31,7 @@
 					<li class="row-fluid">
 						<div class="span3">
 							<a href="/articles?id=<%=article.getId() %>">
-								<img class="img-full-width" src="<%=article.getPhotos().get(0) %>"/>
+								<img class="img-full-width" src="<%=article.getPhotos().size() > 0 ? article.getPhotos().get(0) : "" %>"/>
 							</a> 
 						</div>
 						<div class="span9">

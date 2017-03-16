@@ -108,7 +108,7 @@
 		                                </header>		                               																		
 										
 										<div class="postThumb">
-											<a href="/articles?id=<%=article.getId()%>"><img src="<%=article.getPhotos().get(0) %>" /></a>
+											<a href="/articles?id=<%=article.getId()%>"><img src="<%=article.getPhotos().size()>0? article.getPhotos().get(0):"" %>" /></a>
 										</div>																																							
 		                                <p class="postDesc"><%=article.getDescription() %></p>
 		                                <a style="float:right;" href="/articles?id=<%=article.getId()%>">Đọc tiếp &gt;&gt;&nbsp;</a>

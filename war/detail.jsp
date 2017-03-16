@@ -22,7 +22,7 @@
 <meta property="og:title" content="<%=article.getTitle() %>"/>
 <meta property="og:type" content="article" />
 <meta property="og:description" content="<%=article.getDescription()%>"/>	
-<meta property="og:image" content="<%=article.getPhotos().get(0)%>"/> 	
+<meta property="og:image" content="<%=article.getPhotos().size()>0 ? article.getPhotos().get(0) : "" %>"/> 	
 <meta property="og:site_name" content="Border Collie Việt Nam"/>
 <meta property="fb:admins" content="100000152425373" name="100000152425373"/>	
 
@@ -107,7 +107,7 @@
                                     </div>                                
                                 </header>                                                 								
 								<%
-									if(article.getPhotos().size()>1){
+									if(article.getPhotos()!= null && article.getPhotos().size()>0){
 								%>
 								<!-- The Gallery as lightbox dialog, should be a child element of the document body -->
 								<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">

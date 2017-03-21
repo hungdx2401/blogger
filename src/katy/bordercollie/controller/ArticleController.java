@@ -23,9 +23,9 @@ public class ArticleController extends HttpServlet {
 
 	private static final Logger LOGGER = Logger.getLogger(ArticleController.class.getName());
 
-	private static final String CATEGORY_SEARCH_PRE_TITLE = "Danh mục: ";
-	private static final String AUTHOR_SEARCH_PRE_TITLE = "Tác giả: ";
-	private static final String TIME_SEARCH_PRE_TITLE = "Bài viết ngày: ";
+	private static final String CATEGORY_SEARCH_PRE_TITLE = "Bài viết trong danh mục: ";
+	private static final String AUTHOR_SEARCH_PRE_TITLE = "Bài viết được đăng bởi: ";
+	private static final String TIME_SEARCH_PRE_TITLE = "Bài viết được đăng ngày: ";
 
 	private static final String PARAMETER_ID = "id";
 	private static final String PARAMETER_CATEGORY = "category";

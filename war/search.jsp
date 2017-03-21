@@ -72,15 +72,15 @@
         ================================================== -->
         <div id="content">
         	<div class="container">
-                <div class="row-fluid">
-   					<%
-    					if(listArticle!=null&&listArticle.size()>0){
-    				%>
+                <div class="row-fluid">   					
                     <!-- main content
                     ================================================== -->
                     <div id="mainContent" class="span8">                    
                     	<div id="mainContent_inner">
                     	<h3 class="heading"><%=title %></h3>
+                    	<%
+	    					if(listArticle!=null&&listArticle.size()>0){
+	    				%>
 	                   		<%
 	                           	Calendar cal = Calendar.getInstance();
 	                           	for(Article article: listArticle){
@@ -142,11 +142,11 @@
                                 	}
                                 %>                            	         
                             </ul>
+                            <%
+		    					}
+		                    %>
                         </div>
-                    </div>
-                    <%
-    					}
-                    %>
+                    </div>                    
                     <!-- sidebar
                     ================================================== -->
                     <jsp:include page="/includes/side-bar.jsp"/>

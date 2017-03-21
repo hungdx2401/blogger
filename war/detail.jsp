@@ -93,20 +93,20 @@
                                     </div>
                                     <h2 class="title"><a href="#"> <%=article.getTitle() %></a></h2>
                                     <div class="meta">
-                                        <div class="category">Đăng bởi <a href="/author/<%=article.getCreatedBy()%>"><%=article.getCreatedBy() %></a></div>
+                                        <div class="category">Đăng bởi <a href="/articles?author=<%=article.getCreatedBy()%>"><%=article.getCreatedBy() %></a></div>
                                          <%
                                         	if(article.getCategoryId()!=null){
                                         		Category cate = StaticItem.mapCategory.get(article.getCategoryId());
                                         		if(cate!=null){
                                       			%>
-                                      			<div class="category">Danh mục <a href="/category/<%=cate.getId()%>"><%=cate.getTitle() %></a></div>			
+                                      			<div class="category">Danh mục <a href="/articles?category=<%=cate.getId()%>"><%=cate.getTitle() %></a></div>			
                                       			<%
                                         		}
                                       		}
                                         %>	                                                                                                                                                       
                                     </div>                                
                                 </header>                                                 								
-								<%
+								<%-- <%
 									if(article.getPhotos()!= null && article.getPhotos().size()>0){
 								%>
 								<!-- The Gallery as lightbox dialog, should be a child element of the document body -->
@@ -133,7 +133,7 @@
 								<br>  
 								<%
 									}
-								%>								       
+								%>	 --%>							       
                                 <div class="postContent">
                                 	<%=article.getContent() %>
                                 </div>
@@ -141,7 +141,7 @@
                                 <div class="fb-comments" data-href="http://www.bordercollie.vn/" data-numposts="5"></div>
                             </article>        
                             
-                            <div class="relatedPost">
+                            <%-- <div class="relatedPost">
 	                            <div class="row-fluid">
 	                            	<?
 	                            		if(previous_obj!==null){
@@ -158,7 +158,7 @@
 	                            		}
 	                            	?>
 	                            </div>
-                            </div>                    
+                            </div> --%>                    
                         </div>
                     </div>
                     
@@ -202,9 +202,7 @@
             
         <!-- footer
         ================================================== -->
-        <footer>
-            <div class="container">&copy; 2014 Copyright <a href="/"><?=domain_name?></a></div>
-        </footer>
+        <jsp:include page="/includes/bottom.jsp"/>
     </div>        
  
     

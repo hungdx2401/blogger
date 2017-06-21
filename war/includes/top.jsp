@@ -5,7 +5,7 @@
 	<!-- logo & slogan -->
 	<hgroup>
 		<h1 class="site-title">
-			<a href="/" title="">Border Collie Việt Nam</a>
+			<a href="/" title="">Jike Collie</a>
 		</h1>
 		<h2 class="slogan">"You've never owned a dog until you have owned a Border Collie"</h2>
 	</hgroup>

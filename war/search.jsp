@@ -97,7 +97,7 @@
                                     </div>
                                     <div class="row-fluid">										
 										<div class="span3">
-											<div class="postThumb"><a href="/articles?id=<%=article.getId()%>"><img src="<%=article.getPhotos().get(0) %>=s136-c" /></a></div>
+											<div class="postThumb"><a href="/articles?id=<%=article.getId()%>"><img src="<%=article.getPhotos().size()>0? article.getPhotos().get(0):"" %>=s136-c" /></a></div>
 										</div>
 										<div class="span9">
 											<h2 class="title"><a href="/articles?id=<%=article.getId()%>"><%=article.getTitle()%></a></h2>

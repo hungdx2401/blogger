@@ -59,6 +59,7 @@ public class ArticleController extends HttpServlet {
 	public static final List<Integer> ACCEPT_STATUS = Arrays.asList(1, 2, 3);
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		resp.setCharacterEncoding("UTF-8");
 		try {
 			LOGGER.info("Gọi article controller.");
 
